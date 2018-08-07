@@ -80,6 +80,11 @@ describe("Mixpanel", () => {
         expect(thisObject.someFn).not.toBeCalled()
         expect(thisObject.callIfReady).not.toBeCalled()
       })
+      it("should call the input function when recursive is not supplied", () => {
+        MixpanelTracker.checkReady.mockReturnValueOnce(true)
+        testFunction("someFn")
+        expect(thisObject.someFn).toBeCalled()
+      })
     })
     describe("trackPageView", () => {
       const mixpanelTracker = new MixpanelTracker()
@@ -110,6 +115,12 @@ describe("Mixpanel", () => {
         const trackMockFn = jest.fn()
         MixpanelTracker.getTracker.mockReturnValue({ track: trackMockFn })
         mixpanelTracker._trackEvent("someEvent", {}) //eslint-disable-line
+        expect(trackMockFn).toBeCalledWith("someEvent", {})
+      })
+      it("should call mixpanel.track with empty object if properties is not suppied", () => {
+        const trackMockFn = jest.fn()
+        MixpanelTracker.getTracker.mockReturnValue({ track: trackMockFn })
+        mixpanelTracker._trackEvent("someEvent") //eslint-disable-line
         expect(trackMockFn).toBeCalledWith("someEvent", {})
       })
       it("should call callIfReady with the fnName", () => {
