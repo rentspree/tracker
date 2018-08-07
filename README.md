@@ -24,17 +24,15 @@ myModule();
 
 #### Table of Contents
 
--   [sayHello](#sayhello)
+-   [BaseTracker](#basetracker)
 
-### sayHello
+### BaseTracker
 
-This function says hello.
+This should be the base tracker class
 
 **Parameters**
 
--   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Some name to say hello for.
-
-Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The hello.
+-   `options`  
 
 ## License
 
