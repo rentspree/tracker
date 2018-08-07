@@ -1,4 +1,4 @@
-import { MixpanelTracker } from "../src/mixpanel"
+import { MixpanelTracker } from "../../src/tracker/mixpanel"
 
 describe("Mixpanel", () => {
   describe("static method", () => {

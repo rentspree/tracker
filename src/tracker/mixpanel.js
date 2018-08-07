@@ -1,17 +1,6 @@
-import _ from "lodash"
+import { BaseTracker } from "./base"
 // Mixpanel tracker class to tracking the event via mixpanel
-export class MixpanelTracker {
-  constructor(options) {
-    const o = _.merge(
-      {
-        mapUserIdentity: p => p,
-        mapUserProfile: p => p
-      },
-      options
-    )
-    this.mapUserIdentity = o.mapUserIdentity
-    this.mapUserProfile = o.mapUserProfile
-  }
+export class MixpanelTracker extends BaseTracker {
   static getTracker() {
     if (window && window.mixpanel) {
       return window.mixpanel
