@@ -121,6 +121,15 @@ describe("Mixpanel", () => {
           {}
         )
       })
+      it("should call with empty object if properties is empty", () => {
+        mixpanelTracker.trackEvent("someEvent")
+        expect(mixpanelTracker.callIfReady).toBeCalledWith(
+          "_trackEvent",
+          0,
+          "someEvent",
+          {}
+        )
+      })
     })
     describe("identifyUser", () => {
       const mockFn = {
@@ -129,9 +138,6 @@ describe("Mixpanel", () => {
           set: jest.fn()
         }
       }
-      beforeAll(() => {
-        MixpanelTracker.getTracker.mockReturnValue(mockFn)
-      })
       it("should be able to define mapUserIdentity", () => {
         const mixPanelTracker = new MixpanelTracker({
           mapUserIdentity: p => p.name
@@ -145,6 +151,22 @@ describe("Mixpanel", () => {
           mapUserProfile: p => ({})
         })
         expect(mixPanelTracker.mapUserProfile({ name: "1234" })).toEqual({})
+      })
+      it("should call identify with data from mapUserIdentity", () => {
+        const mixPanelTracker = new MixpanelTracker({
+          mapUserIdentity: () => "hello"
+        })
+        MixpanelTracker.getTracker.mockReturnValue(mockFn)
+        mixPanelTracker.identifyUser()
+        expect(mockFn.identify).toBeCalledWith("hello")
+      })
+      it("should call people.set with data from mapUserIdentity", () => {
+        const mixPanelTracker = new MixpanelTracker({
+          mapUserProfile: () => "profile"
+        })
+        MixpanelTracker.getTracker.mockReturnValue(mockFn)
+        mixPanelTracker.identifyUser()
+        expect(mockFn.people.set).toBeCalledWith("profile")
       })
     })
   })

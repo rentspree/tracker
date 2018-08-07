@@ -66,6 +66,10 @@ describe("GATracker", () => {
           hello: true
         })
       })
+      it("should call tracker function with empty object if null is supply", () => {
+        gaTracker.trackEvent("event-name")
+        expect(gtagFunction).toBeCalledWith("event", "event-name", {})
+      })
     })
     describe("identifyUser", () => {
       it("should call tracker set", () => {
