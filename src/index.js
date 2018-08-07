@@ -17,3 +17,8 @@ export default class Tracker {
     )
   }
 }
+
+export { FullStoryTracker } from "./tracker/fullstory"
+export { GATracker } from "./tracker/ga"
+export { BaseTracker } from "./tracker/base"
+export { MixpanelTracker } from "./tracker/mixpanel"

@@ -1,3 +1,4 @@
+#NO TRAVIS just yet
 language: node_js
 node_js:
   - v6
