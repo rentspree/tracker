@@ -159,7 +159,7 @@ describe("Mixpanel", () => {
       })
       it("should be able to define mapUserProfile", () => {
         const mixPanelTracker = new MixpanelTracker({
-          mapUserProfile: p => ({})
+          mapUserProfile: () => ({})
         })
         expect(mixPanelTracker.mapUserProfile({ name: "1234" })).toEqual({})
       })
