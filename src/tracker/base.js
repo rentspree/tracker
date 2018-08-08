@@ -1,9 +1,16 @@
 import _ from "lodash"
 
 /**
- * This should be the base tracker class
+ * Base for all Tracker class
  */
 export class BaseTracker {
+  /**
+   * Create a Tracker
+   * @param {Object} options specify the tracker options
+   * @param {(Object) => String} options.mapUserIdentity function to map user identity, it takes user `profile`
+   * supply by the event caller and return the userIdentity
+   * @param {(Object) => Object} options.mapUserProfile function to map user profile to send to the tracker
+   */
   constructor(options) {
     const o = _.merge(
       {
@@ -15,7 +22,18 @@ export class BaseTracker {
     this.mapUserIdentity = o.mapUserIdentity
     this.mapUserProfile = o.mapUserProfile
   }
+  /**
+   * Dummy function for tracking page view
+   */
   trackPageView() {}
+
+  /**
+   * Dummy function for identify user
+   */
   identifyUser() {}
+
+  /**
+   * Dummy function for track event
+   */
   trackEvent() {}
 }
