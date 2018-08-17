@@ -30,7 +30,7 @@
     "build": "babel src -d dist",
     "preversion": "npm run lint && npm test && npm run build",
     "version": "standard-changelog && git add CHANGELOG.md",
-    "postpublish": "git push origin master --follow-tags",
+    "xpostpublish": "git push origin master --follow-tags",
     "watch": "npm-watch"
   },
   "jest": {

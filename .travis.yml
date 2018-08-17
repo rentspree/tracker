@@ -1,11 +1,15 @@
-#NO TRAVIS just yet
 language: node_js
 node_js:
-  - v6
+- v8
 script:
-  - npm run lint
-  - npm test -- --coverage
+- npm run lint && npm test
 cache:
-  - yarn
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+- yarn
+deploy:
+  provider: npm
+  email: junrai82@gmail.com
+  api_key:
+    secure: UEYCz4mYPomcWX6iuixKF08maOSHRJIGao9Tt3QEFPJ79tGIYhGa8sT8HM4mXb60Z4B0vakoUW6BfeMb3NuqLYd5MX+hZwaxUKoVrNYlSXxM4FLlSt6bHmHHdS95bIu1Jy/N69B7VVQVvUfgFunZiv9HXsxrl+v65E1meaAxfKWd8Q0vbVWQgVkSiudZ7LjGAsQUPIT7ERgq+Z2e9eTXwg76imxFcQnW8mBeb+TD7N9Q+dLSxgVmJxZ6leTx6I6wsH+QVPf2a7WUGh0X0yw9rOxVGMwsJD9q4hL8YXHo+PSN2vnKeaQ922n9HXdyRRrJTTCr52gXhyqtPmZReaufetrCLR7S2jtNbiQAQCvO0VmbJVpxrQRKBvJYyd9bIaF/djEcZ8E/sYAOk6DK4YSA7I5QfDMwDCcZX4LbRXRYZKaLlLbOxbsCmQ8fJYHoIcfYNrIBzbBKXGfpg6OOdtKXcbpFtODf112/L/oAtpGHjMxaZ2AP6oNJKmKIel0BcDjkIADHPscHRwxmszFwq0tUFjaofW2cDYzMf9nOWkZakQfeNILpCrS/tvRKyBeSsdd0CzhjJtwGgJ/JGdewxIlZ9r/ai5QxjwDnWdtHEY5zEYo+uHGRIh8gmsJnzY5vuYg/Zv80Phde/p3d7nppx1xY1uuqoI19pa8M6ljG0hvbNzs=
+  on:
+    tags: true
+    repo: rentspree/tracker
