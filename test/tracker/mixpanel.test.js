@@ -180,5 +180,14 @@ describe("Mixpanel", () => {
         expect(mockFn.people.set).toBeCalledWith("profile")
       })
     })
+    describe("setAliasUser", () => {
+      const mixpanelTracker = new MixpanelTracker()
+      it("should call mixpanel.alias", () => {
+        const aliasMockFn = jest.fn()
+        MixpanelTracker.getTracker.mockReturnValue({ alias: aliasMockFn })
+        mixpanelTracker.setAliasUser("alias@gmail.com") //eslint-disable-line
+        expect(aliasMockFn).toBeCalledWith("alias@gmail.com")
+      })
+    })
   })
 })
