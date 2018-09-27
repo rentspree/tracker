@@ -81,7 +81,7 @@ GoogleAnalytics that receive the tracking events.
     -   [trackEvent](#trackevent-3)
     -   [getTracker](#gettracker-2)
     -   [checkReady](#checkready)
-    -   [setAliasUser](#setAliasUser)
+    -   [setAliasUser](#setaliasuser)
 
 ### Tracker
 
