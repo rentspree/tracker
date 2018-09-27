@@ -26,7 +26,12 @@ describe("Tracker", () => {
     tracker.trackers = [base1, base2]
     afterEach(() => {
       tracker.trackers.forEach(t => {
-        ;["trackPageView", "identifyUser", "trackEvent", "setAliasUser"].forEach(method => {
+        ;[
+          "trackPageView",
+          "identifyUser",
+          "trackEvent",
+          "setAliasUser"
+        ].forEach(method => {
           t[method].mockReset()
         })
       })

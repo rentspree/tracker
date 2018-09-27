@@ -101,7 +101,7 @@ export class MixpanelTracker extends BaseTracker {
    * Setup alias to identify user when that user signup successfully by calling `mixpanel.alias(alias)`
    * @param {String} alias the alias to define alias of user
    */
-  setAliasUser(alias, callback) {
+  setAliasUser(alias) {
     debug("set alias uesr with name:%s", alias)
     MixpanelTracker.getTracker().alias(alias)
   }

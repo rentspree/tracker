@@ -61,9 +61,7 @@ export default class Tracker {
    */
   setAliasUser(alias) {
     debug("set alias user with name:%s", alias)
-    this.trackers.forEach(
-      t => t.setAliasUser && t.setAliasUser(alias)
-    )
+    this.trackers.forEach(t => t.setAliasUser && t.setAliasUser(alias))
   }
 }
 
