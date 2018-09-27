@@ -81,6 +81,7 @@ GoogleAnalytics that receive the tracking events.
     -   [trackEvent](#trackevent-3)
     -   [getTracker](#gettracker-2)
     -   [checkReady](#checkready)
+    -   [setAliasUser](#setAliasUser)
 
 ### Tracker
 
@@ -274,6 +275,14 @@ this method will return Proxy to avoid error
 Check if mixpanel object is ready by checking \`window.mixpanel.\_\_loaded
 
 Returns **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** wether the mixpanel object is ready
+
+#### setAliasUser
+
+Setup alias to identify user when that user signup successfully by calling `mixpanel.alias(alias)`
+
+**Parameters**
+
+-   `alias` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the alias to define alias of user
 
 ## License
 
