@@ -25,7 +25,7 @@ export class FullStoryTracker extends BaseTracker {
   /**
    * send the identity of this user to FullStory
    * - the identity of the user is the return from `options.mapUserIdentity(profile)`
-   * - the user detail is the return from `options.mapUserProfile(profile`
+   * - the user detail is the return from `options.mapUserProfile(profile)`
    * The method simply call `FA.identity(options.mapUserIdentity(profile), options.mapUserProfile(profile))`
    * @param {Object} profile the user object
    */
