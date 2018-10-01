@@ -63,10 +63,12 @@ GoogleAnalytics that receive the tracking events.
     -   [trackPageView](#trackpageview)
     -   [identifyUser](#identifyuser)
     -   [trackEvent](#trackevent)
+    -   [setAliasUser](#setaliasuser)
 -   [BaseTracker](#basetracker)
     -   [trackPageView](#trackpageview-1)
     -   [identifyUser](#identifyuser-1)
     -   [trackEvent](#trackevent-1)
+    -   [setAliasUser](#setaliasuser-1)
 -   [FullStoryTracker](#fullstorytracker)
     -   [identifyUser](#identifyuser-2)
     -   [getTracker](#gettracker)
@@ -79,6 +81,7 @@ GoogleAnalytics that receive the tracking events.
     -   [trackPageView](#trackpageview-3)
     -   [identifyUser](#identifyuser-4)
     -   [trackEvent](#trackevent-3)
+    -   [setAliasUser](#setaliasuser-2)
     -   [getTracker](#gettracker-2)
     -   [checkReady](#checkready)
 
@@ -133,6 +136,14 @@ pass track event parameter to every registered tracker
 -   `eventName` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the event name
 -   `eventProperties` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the event properties object to be passed to trackers
 
+#### setAliasUser
+
+pass alias user parameter to every registered tracker
+
+**Parameters**
+
+-   `alias` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the alias to define alias of user
+
 ### BaseTracker
 
 Base for all Tracker class
@@ -153,6 +164,10 @@ Dummy function for identify user
 
 Dummy function for track event
 
+#### setAliasUser
+
+Dummy function for set alias of user
+
 ### FullStoryTracker
 
 **Extends BaseTracker**
@@ -164,7 +179,7 @@ The class for FullStory tracker
 send the identity of this user to FullStory
 
 -   the identity of the user is the return from `options.mapUserIdentity(profile)`
--   the user detail is the return from `options.mapUserProfile(profile`
+-   the user detail is the return from `options.mapUserProfile(profile)`
     The method simply call `FA.identity(options.mapUserIdentity(profile), options.mapUserProfile(profile))`
 
 **Parameters**
@@ -261,6 +276,14 @@ Track the event by calling `mixpanel.track(eventName, properties)`
 
 -   `eventName` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the eventName
 -   `properties` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the properties object to be passed to Mixpanel (optional, default `{}`)
+
+#### setAliasUser
+
+Setup alias to identify user when that user signup successfully by calling `mixpanel.alias(alias)`
+
+**Parameters**
+
+-   `alias` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the alias to define alias of user
 
 #### getTracker
 

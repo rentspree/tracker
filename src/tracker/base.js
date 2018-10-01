@@ -36,4 +36,9 @@ export class BaseTracker {
    * Dummy function for track event
    */
   trackEvent() {}
+
+  /**
+   * Dummy function for set alias of user
+   */
+  setAliasUser() {}
 }

@@ -55,6 +55,14 @@ export default class Tracker {
       t => t.trackEvent && t.trackEvent(eventName, eventProperties)
     )
   }
+  /**
+   * pass alias user parameter to every registered tracker
+   * @param {String} alias the alias to define alias of user
+   */
+  setAliasUser(alias) {
+    debug("set alias user with name:%s", alias)
+    this.trackers.forEach(t => t.setAliasUser && t.setAliasUser(alias))
+  }
 }
 
 export { FullStoryTracker } from "./tracker/fullstory"
