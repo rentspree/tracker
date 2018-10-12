@@ -11,8 +11,8 @@ export class FullStoryTracker extends BaseTracker {
    * @static
    */
   static getTracker() {
-    if (window.FA) {
-      return window.FA
+    if (window.FS) {
+      return window.FS
     }
     return new Proxy(
       {},
