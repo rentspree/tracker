@@ -3,10 +3,10 @@ import { FullStoryTracker } from "../../src/tracker/fullstory"
 describe("FullStory", () => {
   describe("getTracker", () => {
     afterEach(() => {
-      global.FA = undefined
+      global.FS = undefined
     })
-    it("should return gtag object if it has one", () => {
-      global.FA = { key1: true }
+    it("should return object if it has one", () => {
+      global.FS = { key1: true }
       expect(FullStoryTracker.getTracker()).toEqual(
         expect.objectContaining({
           key1: true
