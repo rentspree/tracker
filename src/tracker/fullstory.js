@@ -1,4 +1,7 @@
+import createDebug from "debug"
 import { BaseTracker } from "./base"
+
+const debug = createDebug("rentspree-tracker:fullstory")
 
 /**
  * The class for FullStory tracker
@@ -14,6 +17,7 @@ export class FullStoryTracker extends BaseTracker {
     if (window.FS) {
       return window.FS
     }
+    debug("warning! Seems like window.FS is not defined")
     return new Proxy(
       {},
       {
@@ -31,9 +35,10 @@ export class FullStoryTracker extends BaseTracker {
    */
   identifyUser(profile) {
     // For UserID Tracking view
-    FullStoryTracker.getTracker().identify(
-      this.mapUserIdentity(profile),
-      this.mapUserProfile(profile)
-    )
+    debug("identify user of", profile)
+    const identity = this.mapUserIdentity(profile)
+    const fsProfile = this.mapUserProfile(profile)
+    debug("FS.identify(%s, %o)", identity, fsProfile)
+    FullStoryTracker.getTracker().identify(identity, fsProfile)
   }
 }
