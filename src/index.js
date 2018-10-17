@@ -31,10 +31,13 @@ export default class Tracker {
    * pass track pageview parameter to every registeredTracker
    * @param {String} url the url to track
    * @param {String} path the path to track
+   * @param {Object} properties the additional properties object to be passed to trackers
    */
-  trackPageView(url, path) {
-    debug("track pageview for url:%s path:%s", url, path)
-    this.trackers.forEach(t => t.trackPageView && t.trackPageView(url, path))
+  trackPageView(url, path, properties = {}) {
+    debug("track pageview for url:%s path:%s", url, path, properties)
+    this.trackers.forEach(
+      t => t.trackPageView && t.trackPageView(url, path, properties)
+    )
   }
   /**
    * pass identify user parameter to every regeisterd tracker

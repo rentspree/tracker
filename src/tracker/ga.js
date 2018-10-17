@@ -36,8 +36,9 @@ export class GATracker extends BaseTracker {
    * Track the page view by calling `gtag("config", trackingId, {page_locationi: url, page_path: path})`
    * @param {String} url the url to track, this will be passed to `page_location` key
    * @param {String} path the path, this will be passed to `page_path` key
+   * @param {Object} properties the additional properties
    */
-  trackPageView(url, path, ipAddress) {
+  trackPageView(url, path, { ipAddress }) {
     debug("track pageview for url:%s, path:%s", url, path)
     GATracker.getTracker()("config", this.trackingId, {
       page_location: url,

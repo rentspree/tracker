@@ -54,11 +54,12 @@ export class MixpanelTracker extends BaseTracker {
     this[fnName](...args)
   }
 
-  _trackPageView(url, path) {
-    debug("track pageview for url:%s, path:%s", url, path)
+  _trackPageView(url, path, properties) {
+    debug("track pageview for url:%s, path:%s", url, path, properties)
     MixpanelTracker.getTracker().track("page viewed", {
       url,
-      path
+      path,
+      ...properties
     })
   }
 
@@ -66,9 +67,10 @@ export class MixpanelTracker extends BaseTracker {
    * Track the page view by calling `mixpanel.track("page viewd", ...)`
    * @param {String} url the url to track
    * @param {String} path the path
+   * @param {Object} properties the additional properties
    */
-  trackPageView(url, path) {
-    this.callIfReady("_trackPageView", 0, url, path)
+  trackPageView(url, path, properties = {}) {
+    this.callIfReady("_trackPageView", 0, url, path, properties)
   }
 
   /**

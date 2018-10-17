@@ -98,6 +98,20 @@ describe("Mixpanel", () => {
           path: "hello-path"
         })
       })
+      it("should call mixpanel.track with additional properties", () => {
+        const trackMockFn = jest.fn()
+        MixpanelTracker.getTracker.mockReturnValue({ track: trackMockFn })
+        mixpanelTracker._trackPageView("/some-url", "hello-path", { //eslint-disable-line
+          pageName: "Hello World Page",
+          pageGroup: "Occupation Page"
+        })
+        expect(trackMockFn).toBeCalledWith("page viewed", {
+          url: "/some-url",
+          path: "hello-path",
+          pageName: "Hello World Page",
+          pageGroup: "Occupation Page"
+        })
+      })
       it("should call callIfReady with the fnName", () => {
         mixpanelTracker.trackPageView("/some-url", "hello-path")
         expect(mixpanelTracker.callIfReady).toBeCalledWith(

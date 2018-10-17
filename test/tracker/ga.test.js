@@ -51,7 +51,9 @@ describe("GATracker", () => {
     })
     describe("trackPageView", () => {
       it("should call tracker function", () => {
-        gaTracker.trackPageView("/some-url", "/some-path", "ip-address")
+        gaTracker.trackPageView("/some-url", "/some-path", {
+          ipAddress: "ip-address"
+        })
         expect(gtagFunction).toBeCalledWith("config", trackingID, {
           page_location: "/some-url",
           page_path: "/some-path",

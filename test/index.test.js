@@ -40,7 +40,19 @@ describe("Tracker", () => {
       it("should call all the tracker", () => {
         tracker.trackPageView("/some-url", "path")
         tracker.trackers.forEach(t => {
-          expect(t.trackPageView).toHaveBeenCalledWith("/some-url", "path")
+          expect(t.trackPageView).toHaveBeenCalledWith("/some-url", "path", {})
+        })
+      })
+      it("should call all the tracker with additional properties", () => {
+        tracker.trackPageView("/some-url", "path", {
+          pageName: "Hello World Page",
+          pageGroup: "Occupation Page"
+        })
+        tracker.trackers.forEach(t => {
+          expect(t.trackPageView).toHaveBeenCalledWith("/some-url", "path", {
+            pageName: "Hello World Page",
+            pageGroup: "Occupation Page"
+          })
         })
       })
     })
