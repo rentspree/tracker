@@ -118,7 +118,7 @@ pass track pageview parameter to every registeredTracker
 
 -   `url` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the url to track
 -   `path` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the path to track
--   `properties` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** the additional properties object
+-   `properties` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the additional properties object to be passed to trackers (optional, default `{}`)
 
 #### identifyUser
 
@@ -212,7 +212,8 @@ Track the page view by calling `gtag("config", trackingId, {page_locationi: url,
 
 -   `url` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the url to track, this will be passed to `page_location` key
 -   `path` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the path, this will be passed to `page_path` key
--   `properties` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** the additional properties object 
+-   `properties` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the additional properties
+    -   `properties.ipAddress`  
 
 #### identifyUser
 
@@ -255,7 +256,8 @@ Track the page view by calling `mixpanel.track("page viewd", ...)`
 
 -   `url` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the url to track
 -   `path` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the path
--   `properties` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** the additional properties object
+-   `properties` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the additional properties (optional, default `{}`)
+
 #### identifyUser
 
 Identify the user
