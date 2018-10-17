@@ -118,7 +118,8 @@ describe("Mixpanel", () => {
           "_trackPageView",
           0,
           "/some-url",
-          "hello-path"
+          "hello-path",
+          {}
         )
       })
     })
