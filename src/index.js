@@ -34,7 +34,12 @@ export default class Tracker {
    * @param {Object} properties the additional properties object to be passed to trackers
    */
   trackPageView(url, path, properties = {}) {
-    debug("track pageview for url:%s path:%s", url, path, properties)
+    debug(
+      "track pageview for url:%s path:%s properties:%o",
+      url,
+      path,
+      properties
+    )
     this.trackers.forEach(
       t => t.trackPageView && t.trackPageView(url, path, properties)
     )
