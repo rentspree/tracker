@@ -74,13 +74,13 @@ describe("GATracker", () => {
       })
     })
     describe("identifyUser", () => {
-      it("should call tracker set", () => {
+      it("should call tracker config", () => {
         gaTracker.identifyUser({
           email: "my-mail",
           firstName: "John",
           lastName: "Doe"
         })
-        expect(gtagFunction).toBeCalledWith("set", {
+        expect(gtagFunction).toBeCalledWith("config", {
           email: "my-mail",
           user_id: "my-mail",
           name: "John Doe"

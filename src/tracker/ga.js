@@ -48,16 +48,16 @@ export class GATracker extends BaseTracker {
   }
 
   /**
-   * Identify the user by calling `gtag("set", ...userObject)`
+   * Identify the user by calling `gtag("config", ...userObject)`
    * the `userObject` is a return from `options.mapUserProfile(profile)`
    * @param {Object} profile the profile object
    */
   identifyUser(profile) {
     debug("identify user %o", profile)
     // For UserID Tracking view
-    const data = this.mapUserProfile(profile)
-    debug("gtag('set', %o)", data)
-    GATracker.getTracker()("set", data)
+    const mappedProfile = this.mapUserProfile(profile)
+    debug("gtag('config', %o)", mappedProfile)
+    GATracker.getTracker()("config", mappedProfile)
   }
   /**
    * track the event by calling `gtag("event", eventName, properties)`
