@@ -217,7 +217,7 @@ Track the page view by calling `gtag("config", trackingId, {page_locationi: url,
 
 #### identifyUser
 
-Identify the user by calling `gtag("set", ...userObject)`
+Identify the user by calling `gtag("config", ...userObject)`
 the `userObject` is a return from `options.mapUserProfile(profile)`
 
 **Parameters**
