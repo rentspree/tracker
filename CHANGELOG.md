@@ -1,3 +1,8 @@
+<a name="0.0.13"></a>
+## [0.0.13](https://github.com/rentspree/tracker/compare/v0.0.12...v0.0.13) (2018-12-18)
+
+
+
 <a name="0.0.12"></a>
 ## [0.0.12](https://github.com/rentspree/tracker/compare/v0.0.11...v0.0.12) (2018-12-18)
 
