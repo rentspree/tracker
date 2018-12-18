@@ -55,7 +55,9 @@ export class GATracker extends BaseTracker {
   identifyUser(profile) {
     debug("identify user %o", profile)
     // For UserID Tracking view
-    GATracker.getTracker()("set", this.mapUserProfile(profile))
+    const data = this.mapUserProfile(profile)
+    debug("gtag('set', %o)", data)
+    GATracker.getTracker()("set", data)
   }
   /**
    * track the event by calling `gtag("event", eventName, properties)`
