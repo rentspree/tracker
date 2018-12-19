@@ -39,7 +39,11 @@ export class GATracker extends BaseTracker {
    * @param {Object} properties the additional properties
    */
   trackPageView(url, path, { ipAddress }) {
-    debug("track pageview for url:%s, path:%s", url, path)
+    const obj = {
+      url,
+      path
+    }
+    debug("track pageview for object %0", obj)
     GATracker.getTracker()("config", this.trackingId, {
       page_location: url,
       page_path: path,

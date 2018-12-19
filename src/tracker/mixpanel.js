@@ -55,7 +55,12 @@ export class MixpanelTracker extends BaseTracker {
   }
 
   _trackPageView(url, path, properties) {
-    debug("track pageview for url:%s, path:%s", url, path, properties)
+    const obj = {
+      url,
+      path,
+      properties
+    }
+    debug("track pageview for object %0", obj)
     MixpanelTracker.getTracker().track("page viewed", {
       url,
       path,
