@@ -61,7 +61,7 @@ export class GATracker extends BaseTracker {
     // For UserID Tracking view
     const mappedProfile = this.mapUserProfile(profile)
     debug("gtag('config', %o)", mappedProfile)
-    GATracker.getTracker()("config", mappedProfile)
+    GATracker.getTracker()("config", this.trackingId, mappedProfile)
   }
   /**
    * track the event by calling `gtag("event", eventName, properties)`

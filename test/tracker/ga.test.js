@@ -80,7 +80,7 @@ describe("GATracker", () => {
           firstName: "John",
           lastName: "Doe"
         })
-        expect(gtagFunction).toBeCalledWith("config", {
+        expect(gtagFunction).toBeCalledWith("config", trackingID, {
           email: "my-mail",
           user_id: "my-mail",
           name: "John Doe"
