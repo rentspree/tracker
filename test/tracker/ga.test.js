@@ -1,9 +1,9 @@
-import {GATracker} from "../../src/tracker/ga"
+import { GATracker } from "../../src/tracker/ga"
 
 describe("GATracker", () => {
   describe("constructor", () => {
     it("should hold trackingId from option", () => {
-      const gaTracker = new GATracker({trackingId: "hello"})
+      const gaTracker = new GATracker({ trackingId: "hello" })
       expect(gaTracker.trackingId).toEqual("hello")
     })
   })
@@ -12,7 +12,7 @@ describe("GATracker", () => {
       global.gtag = undefined
     })
     it("should return gtag object if it has one", () => {
-      global.gtag = {key1: true}
+      global.gtag = { key1: true }
       expect(GATracker.getTracker()).toEqual(
         expect.objectContaining({
           key1: true
@@ -63,7 +63,7 @@ describe("GATracker", () => {
     })
     describe("trackEvent", () => {
       it("should call tracker function", () => {
-        gaTracker.trackEvent("event-name", {hello: true})
+        gaTracker.trackEvent("event-name", { hello: true })
         expect(gtagFunction).toBeCalledWith("event", "event-name", {
           hello: true
         })
