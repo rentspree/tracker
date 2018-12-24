@@ -43,7 +43,7 @@ export class GATracker extends BaseTracker {
       url,
       path
     }
-    debug("track pageview for object %0", obj)
+    debug("track pageview for object %o", obj)
     GATracker.getTracker()("config", this.trackingId, {
       page_location: url,
       page_path: path,
@@ -60,8 +60,11 @@ export class GATracker extends BaseTracker {
     debug("identify user %o", profile)
     // For UserID Tracking view
     const mappedProfile = this.mapUserProfile(profile)
-    debug("gtag('config', %o)", mappedProfile)
-    GATracker.getTracker()("config", this.trackingId, mappedProfile)
+    debug("gtag('set', %o)", mappedProfile)
+    GATracker.getTracker()("set", mappedProfile)
+    GATracker.getTracker()("event", "Get Profile", {
+      event_category: "Technical"
+    })
   }
   /**
    * track the event by calling `gtag("event", eventName, properties)`
