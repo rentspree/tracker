@@ -82,7 +82,7 @@ describe("AmplitudeTracker", () => {
     const amplitudeTracker = new AmplitudeTracker({
       apiKey,
       amplitudeSDK: mockAmplitudeSDK,
-      mapUserProfile: profile => profile.id
+      mapUserIdentity: profile => profile.id
     })
     describe("identifyUser", () => {
       it("should call tracker config", () => {
