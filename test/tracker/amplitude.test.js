@@ -72,27 +72,124 @@ describe("AmplitudeTracker", () => {
   })
   describe("tracking function", () => {
     const apiKey = "the-trackingId"
-    const setUserIdMock = jest.fn()
     const logEventMock = jest.fn()
+    const setUserIdMock = jest.fn()
+    const setIdentityMock = jest.fn()
+    let setValue = {}
+    const mockSetOnce = jest.fn((key, value) => {
+      setValue[key] = value
+    })
+    const mockSet = jest.fn((key, value) => {
+      setValue[key] = value
+    })
     const mockAmplitudeSDK = {
       getInstance: () => ({
         init: jest.fn(),
+        identify: setIdentityMock,
         setUserId: setUserIdMock,
         logEvent: logEventMock
+      }),
+      Identify: () => ({
+        setValue,
+        setOnce: mockSetOnce,
+        set: mockSet
       })
     }
     const amplitudeTracker = new AmplitudeTracker({
       apiKey,
       amplitudeSDK: mockAmplitudeSDK,
-      mapUserIdentity: profile => profile.id
+      mapUserIdentity: profile => profile.id,
+      mapUserProfile: profile => ({
+        id: {
+          value: profile.id,
+          setOnce: true
+        }
+      })
     })
     describe("identifyUser", () => {
-      it("should call tracker config", () => {
+      afterEach(() => {
+        setValue = {}
+        setUserIdMock.mockClear()
+        setIdentityMock.mockClear()
+        mockSetOnce.mockClear()
+        mockSet.mockClear()
+      })
+      it("should call setUserId", () => {
         const profile = {
           id: "userId"
         }
         amplitudeTracker.identifyUser(profile)
         expect(setUserIdMock).toBeCalledWith(profile.id)
+      })
+      it("should call identify", () => {
+        const profile = {
+          id: "userId"
+        }
+        amplitudeTracker.identifyUser(profile)
+        // eslint-disable-next-line
+        const identifyObj = amplitudeTracker._setUserProperties({
+          id: {
+            value: profile.id,
+            setOnce: true
+          }
+        })
+        expect(setIdentityMock).toBeCalledWith(identifyObj)
+      })
+    })
+    describe("_setUserProperties", () => {
+      afterEach(() => {
+        setValue = {}
+        setUserIdMock.mockClear()
+        setIdentityMock.mockClear()
+        mockSetOnce.mockClear()
+        mockSet.mockClear()
+      })
+      it("should call setOnce for setOnce is true", () => {
+        const mappedProfile = {
+          id: {
+            value: "userId",
+            setOnce: true
+          }
+        }
+        // eslint-disable-next-line
+        amplitudeTracker._setUserProperties(mappedProfile)
+        expect(mockSet).not.toHaveBeenCalled()
+        expect(mockSetOnce).toBeCalledWith("id", "userId")
+      })
+      it("should call set for setOnce is false", () => {
+        const mappedProfile = {
+          id: {
+            value: "userId",
+            setOnce: false
+          }
+        }
+        // eslint-disable-next-line
+        amplitudeTracker._setUserProperties(mappedProfile)
+        expect(mockSetOnce).not.toHaveBeenCalled()
+        expect(mockSet).toBeCalledWith("id", "userId")
+      })
+      it("should return correct obj", () => {
+        const mappedProfile = {
+          id: {
+            value: "userId",
+            setOnce: false
+          },
+          firstName: {
+            value: "John",
+            setOnce: false
+          },
+          lastName: {
+            value: "Snow",
+            setOnce: false
+          }
+        }
+        // eslint-disable-next-line
+        const result = amplitudeTracker._setUserProperties(mappedProfile)
+        expect(result.setValue).toEqual({
+          id: "userId",
+          firstName: "John",
+          lastName: "Snow"
+        })
       })
     })
 
