@@ -170,10 +170,26 @@ this method will return Proxy to avoid error
 
 Identify the user by calling `setUserId(userId)`
 the `userId` is a return from `options.mapUserIdentity(profile)`
+the method also send user properties for identify user in amplitude by calling `identify(userPropertiesObj)`
+the `userPropertiesObject` is a return from function `_setUserProperties(this.mapUserProfile(profile))` which will create amplitude's user identify object from mapped user data
+the `mapUserProfile` should return the data with format { key: { value, setOnce }}
 
 **Parameters**
 
 -   `profile` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the profile object
+
+**Examples**
+
+```javascript
+{
+   id: {
+     value: "this-is-user-id",
+     setOnce: true
+   }
+}
+// which value is the value of the key
+// setOnce is indicator to set this key as unchangeable value in amplitude
+```
 
 #### trackEvent
 
