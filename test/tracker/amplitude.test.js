@@ -73,10 +73,12 @@ describe("AmplitudeTracker", () => {
   describe("tracking function", () => {
     const apiKey = "the-trackingId"
     const setUserIdMock = jest.fn()
+    const logEventMock = jest.fn()
     const mockAmplitudeSDK = {
       getInstance: () => ({
         init: jest.fn(),
-        setUserId: setUserIdMock
+        setUserId: setUserIdMock,
+        logEvent: logEventMock
       })
     }
     const amplitudeTracker = new AmplitudeTracker({
@@ -91,6 +93,17 @@ describe("AmplitudeTracker", () => {
         }
         amplitudeTracker.identifyUser(profile)
         expect(setUserIdMock).toBeCalledWith(profile.id)
+      })
+    })
+
+    describe("trackEvent", () => {
+      it("should call logEvent with param", () => {
+        const eventName = "test"
+        const properties = {
+          name: "a"
+        }
+        amplitudeTracker.trackEvent(eventName, properties)
+        expect(logEventMock).toBeCalledWith(eventName, properties)
       })
     })
   })

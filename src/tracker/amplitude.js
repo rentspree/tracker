@@ -51,4 +51,18 @@ export class AmplitudeTracker extends BaseTracker {
     debug("amplitude.setUserId(%s)", mappedProfile)
     this.getTracker().setUserId(mappedProfile)
   }
+
+  /**
+   * track the event by calling `logEvent("event name here", properties)`
+   * @param {String} eventName the eventName
+   * @param {Object} properties the properties to be passed to amplitude
+   */
+  trackEvent(eventName, properties = {}) {
+    debug(
+      "amplitude track event for name:%s, properties:%o",
+      eventName,
+      properties
+    )
+    this.getTracker().logEvent(eventName, properties)
+  }
 }
