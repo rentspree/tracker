@@ -64,25 +64,28 @@ GoogleAnalytics that receive the tracking events.
     -   [identifyUser](#identifyuser)
     -   [trackEvent](#trackevent)
     -   [setAliasUser](#setaliasuser)
+-   [AmplitudeTracker](#amplitudetracker)
+    -   [getTracker](#gettracker)
+    -   [identifyUser](#identifyuser-1)
 -   [BaseTracker](#basetracker)
     -   [trackPageView](#trackpageview-1)
-    -   [identifyUser](#identifyuser-1)
+    -   [identifyUser](#identifyuser-2)
     -   [trackEvent](#trackevent-1)
     -   [setAliasUser](#setaliasuser-1)
 -   [FullStoryTracker](#fullstorytracker)
-    -   [identifyUser](#identifyuser-2)
-    -   [getTracker](#gettracker)
+    -   [identifyUser](#identifyuser-3)
+    -   [getTracker](#gettracker-1)
 -   [GATracker](#gatracker)
     -   [trackPageView](#trackpageview-2)
-    -   [identifyUser](#identifyuser-3)
+    -   [identifyUser](#identifyuser-4)
     -   [trackEvent](#trackevent-2)
-    -   [getTracker](#gettracker-1)
+    -   [getTracker](#gettracker-2)
 -   [MixpanelTracker](#mixpaneltracker)
     -   [trackPageView](#trackpageview-3)
-    -   [identifyUser](#identifyuser-4)
+    -   [identifyUser](#identifyuser-5)
     -   [trackEvent](#trackevent-3)
     -   [setAliasUser](#setaliasuser-2)
-    -   [getTracker](#gettracker-2)
+    -   [getTracker](#gettracker-3)
     -   [checkReady](#checkready)
 
 ### Tracker
@@ -144,6 +147,32 @@ pass alias user parameter to every registered tracker
 **Parameters**
 
 -   `alias` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the alias to define alias of user
+
+### AmplitudeTracker
+
+**Extends BaseTracker**
+
+The class for Amplitude tracker
+
+**Parameters**
+
+-   `options`  
+
+#### getTracker
+
+Static method for getting the amplitude tracker
+
+Returns **([Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function) \| [Proxy](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Proxy))** the amplitude instance if it exist,
+this method will return Proxy to avoid error
+
+#### identifyUser
+
+Identify the user by calling `setUserId(userId)`
+the `userId` is a return from `options.mapUserProfile(profile)`
+
+**Parameters**
+
+-   `profile` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the profile object
 
 ### BaseTracker
 
