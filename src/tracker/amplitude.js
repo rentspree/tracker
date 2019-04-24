@@ -42,12 +42,12 @@ export class AmplitudeTracker extends BaseTracker {
 
   /**
    * Identify the user by calling `setUserId(userId)`
-   * the `userId` is a return from `options.mapUserProfile(profile)`
+   * the `userId` is a return from `options.mapUserIdentity(profile)`
    * @param {Object} profile the profile object
    */
   identifyUser(profile) {
     debug("identify user %o", profile)
-    const mappedProfile = this.mapUserProfile(profile)
+    const mappedProfile = this.mapUserIdentity(profile)
     debug("amplitude.setUserId(%s)", mappedProfile)
     this.getTracker().setUserId(mappedProfile)
   }
