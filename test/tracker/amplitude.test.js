@@ -21,6 +21,7 @@ describe("AmplitudeTracker", () => {
         })
       }
       const apiKey = "apiKey"
+      // eslint-disable-next-line
       const tracker = new AmplitudeTracker({
         apiKey,
         amplitudeSDK: mockAmplitudeSDK
@@ -35,6 +36,7 @@ describe("AmplitudeTracker", () => {
         })
       }
       const apiKey = "apiKey"
+      // eslint-disable-next-line
       const tracker = new AmplitudeTracker({
         amplitudeSDK: mockAmplitudeSDK
       })
