@@ -67,10 +67,11 @@ GoogleAnalytics that receive the tracking events.
 -   [AmplitudeTracker](#amplitudetracker)
     -   [getTracker](#gettracker)
     -   [identifyUser](#identifyuser-1)
+    -   [trackEvent](#trackevent-1)
 -   [BaseTracker](#basetracker)
     -   [trackPageView](#trackpageview-1)
     -   [identifyUser](#identifyuser-2)
-    -   [trackEvent](#trackevent-1)
+    -   [trackEvent](#trackevent-2)
     -   [setAliasUser](#setaliasuser-1)
 -   [FullStoryTracker](#fullstorytracker)
     -   [identifyUser](#identifyuser-3)
@@ -78,12 +79,12 @@ GoogleAnalytics that receive the tracking events.
 -   [GATracker](#gatracker)
     -   [trackPageView](#trackpageview-2)
     -   [identifyUser](#identifyuser-4)
-    -   [trackEvent](#trackevent-2)
+    -   [trackEvent](#trackevent-3)
     -   [getTracker](#gettracker-2)
 -   [MixpanelTracker](#mixpaneltracker)
     -   [trackPageView](#trackpageview-3)
     -   [identifyUser](#identifyuser-5)
-    -   [trackEvent](#trackevent-3)
+    -   [trackEvent](#trackevent-4)
     -   [setAliasUser](#setaliasuser-2)
     -   [getTracker](#gettracker-3)
     -   [checkReady](#checkready)
@@ -168,11 +169,20 @@ this method will return Proxy to avoid error
 #### identifyUser
 
 Identify the user by calling `setUserId(userId)`
-the `userId` is a return from `options.mapUserProfile(profile)`
+the `userId` is a return from `options.mapUserIdentity(profile)`
 
 **Parameters**
 
 -   `profile` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the profile object
+
+#### trackEvent
+
+track the event by calling `logEvent("event name here", properties)`
+
+**Parameters**
+
+-   `eventName` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the eventName
+-   `properties` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the properties to be passed to amplitude (optional, default `{}`)
 
 ### BaseTracker
 
