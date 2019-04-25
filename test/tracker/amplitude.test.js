@@ -13,6 +13,20 @@ describe("AmplitudeTracker", () => {
       })
       expect(amplitudeTracker.amplitudeSDK).toEqual(mockGetInstance)
     })
+    it("should set amplitudeConfig from option", () => {
+      const amplitudeTracker = new AmplitudeTracker({
+        amplitudeConfig: {
+          domain: ".test.com"
+        }
+      })
+      expect(amplitudeTracker.amplitudeConfig).toEqual({
+        domain: ".test.com"
+      })
+    })
+    it("should set amplitudeConfig as empty object if it not exist in options", () => {
+      const amplitudeTracker = new AmplitudeTracker({})
+      expect(amplitudeTracker.amplitudeConfig).toEqual({})
+    })
     it("should init tracker if amplitudeSDK and apiKey is exist", () => {
       const initTracker = jest.fn()
       const mockAmplitudeSDK = {
@@ -26,7 +40,27 @@ describe("AmplitudeTracker", () => {
         apiKey,
         amplitudeSDK: mockAmplitudeSDK
       })
-      expect(initTracker).toBeCalledWith(apiKey)
+      expect(initTracker).toBeCalledWith(apiKey, null, {})
+    })
+    it("should init tracker with config if amplitudeSDK and apiKey is exist", () => {
+      const initTracker = jest.fn()
+      const mockAmplitudeSDK = {
+        getInstance: () => ({
+          init: initTracker
+        })
+      }
+      const apiKey = "apiKey"
+      // eslint-disable-next-line
+      const tracker = new AmplitudeTracker({
+        apiKey,
+        amplitudeSDK: mockAmplitudeSDK,
+        amplitudeConfig: {
+          domain: ".test.com"
+        }
+      })
+      expect(initTracker).toBeCalledWith(apiKey, null, {
+        domain: ".test.com"
+      })
     })
     it("should not init tracker if amplitudeSDK or apiKey is not exist", () => {
       const initTracker = jest.fn()

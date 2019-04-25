@@ -5,8 +5,9 @@ const debug = createDebug("rentspree-tracker:amplitude")
 
 /**
  * The class for Amplitude tracker
- * @param {String} options.amplitudeSDK the amplitude SDK
+ * @param {AmplitudeSDK} options.amplitudeSDK the amplitude SDK
  * @param {String} options.apiKey the api key of amplitude
+ * @param {Object} options.amplitudeConfig the amplitude sdk config object [list of configuration options](https://developers.amplitude.com/?javascript#sdk-advanced-settings)
  * @extends BaseTracker
  */
 export class AmplitudeTracker extends BaseTracker {
@@ -14,11 +15,12 @@ export class AmplitudeTracker extends BaseTracker {
     super(options)
     this.amplitudeSDK = options.amplitudeSDK
     this.apiKey = options.apiKey
-    this.setOnceKey = options.setOnceKey || []
+    this.amplitudeConfig = options.amplitudeConfig || {}
     if (this.amplitudeSDK && this.apiKey) {
       debug("initialize Amplitude for Instance %o", options.amplitudeSDK)
       debug("initialize Amplitude Instance for API KEY %o", options.apiKey)
-      this.getTracker().init(this.apiKey)
+      debug("initialize Amplitude with Config %o", this.amplitudeConfig)
+      this.getTracker().init(this.apiKey, null, this.amplitudeConfig)
     }
   }
   /**
@@ -45,16 +47,17 @@ export class AmplitudeTracker extends BaseTracker {
    * the `userId` is a return from `options.mapUserIdentity(profile)`
    * the method also send user properties for identify user in amplitude by calling `identify(userPropertiesObj)`
    * the `userPropertiesObject` is a return from function `_setUserProperties(this.mapUserProfile(profile))` which will create amplitude's user identify object from mapped user data
-   * the `mapUserProfile` should return the data with format { key: { value, setOnce }}
-   * @example
+   * the `mapUserProfile` should return the data with format below
+   * ```javascript
    * {
    *    id: {
    *      value: "this-is-user-id",
    *      setOnce: true
    *    }
    * }
-   * // which value is the value of the key
-   * // setOnce is indicator to set this key as unchangeable value in amplitude
+   * ```
+   *  which value is the value of the key
+   *  setOnce is indicator to set this key as unchangeable value in amplitude
    * @param {Object} profile the profile object
    */
   identifyUser(profile) {
