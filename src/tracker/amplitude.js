@@ -66,10 +66,10 @@ export class AmplitudeTracker extends BaseTracker {
     const mappedProfile = this.mapUserProfile(profile)
     debug("mappedProfile %o", mappedProfile)
     const amplitudeUserIdentifierObj = this._setUserProperties(mappedProfile)
-    debug("amplitude.identify(%o)", amplitudeUserIdentifierObj)
-    this.getTracker().identify(amplitudeUserIdentifierObj)
     debug("amplitude.setUserId(%s)", mappedIdentity)
     this.getTracker().setUserId(mappedIdentity)
+    debug("amplitude.identify(%o)", amplitudeUserIdentifierObj)
+    this.getTracker().identify(amplitudeUserIdentifierObj)
   }
 
   _setUserProperties(mappedProfile = {}) {
