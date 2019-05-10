@@ -68,6 +68,7 @@ GoogleAnalytics that receive the tracking events.
     -   [getTracker](#gettracker)
     -   [identifyUser](#identifyuser-1)
     -   [trackEvent](#trackevent-1)
+    -   [logout](#logout)
 -   [BaseTracker](#basetracker)
     -   [trackPageView](#trackpageview-1)
     -   [identifyUser](#identifyuser-2)
@@ -198,6 +199,11 @@ track the event by calling `logEvent("event name here", properties)`
 
 -   `eventName` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the eventName
 -   `properties` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the properties to be passed to amplitude (optional, default `{}`)
+
+#### logout
+
+generate new session for amplitude tracker when user logout
+set userId to null and generate new deviceId for handle logout user session
 
 ### BaseTracker
 
