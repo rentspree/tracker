@@ -109,6 +109,7 @@ describe("AmplitudeTracker", () => {
     const logEventMock = jest.fn()
     const setUserIdMock = jest.fn()
     const setIdentityMock = jest.fn()
+    const regenerateDeviceIdMock = jest.fn()
     let setValue = {}
     const mockSetOnce = jest.fn((key, value) => {
       setValue[key] = value
@@ -121,7 +122,8 @@ describe("AmplitudeTracker", () => {
         init: jest.fn(),
         identify: setIdentityMock,
         setUserId: setUserIdMock,
-        logEvent: logEventMock
+        logEvent: logEventMock,
+        regenerateDeviceId: regenerateDeviceIdMock
       }),
       Identify: () => ({
         setValue,
@@ -228,6 +230,12 @@ describe("AmplitudeTracker", () => {
     })
 
     describe("trackEvent", () => {
+      afterEach(() => {
+        logEventMock.mockClear()
+        setUserIdMock.mockClear()
+        setIdentityMock.mockClear()
+        regenerateDeviceIdMock.mockClear()
+      })
       it("should call logEvent with param", () => {
         const eventName = "test"
         const properties = {
@@ -235,6 +243,23 @@ describe("AmplitudeTracker", () => {
         }
         amplitudeTracker.trackEvent(eventName, properties)
         expect(logEventMock).toBeCalledWith(eventName, properties)
+      })
+    })
+
+    describe("logout", () => {
+      afterEach(() => {
+        logEventMock.mockClear()
+        setUserIdMock.mockClear()
+        setIdentityMock.mockClear()
+        regenerateDeviceIdMock.mockClear()
+      })
+      it("should call setUserId", () => {
+        amplitudeTracker.logout()
+        expect(setUserIdMock).toBeCalledWith(null)
+      })
+      it("should call regenerateDeviceId", () => {
+        amplitudeTracker.logout()
+        expect(regenerateDeviceIdMock).toBeCalled()
       })
     })
   })

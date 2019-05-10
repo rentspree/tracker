@@ -98,4 +98,15 @@ export class AmplitudeTracker extends BaseTracker {
     )
     this.getTracker().logEvent(eventName, properties)
   }
+
+  /**
+   * generate new session for amplitude tracker when user logout
+   * set userId to null and generate new deviceId for handle logout user session
+   */
+  logout() {
+    debug("set amplitude user to null")
+    this.getTracker().setUserId(null)
+    debug("generate new device id for amplitude")
+    this.getTracker().regenerateDeviceId()
+  }
 }
