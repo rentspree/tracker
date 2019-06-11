@@ -18,7 +18,7 @@ export class AmplitudeTracker extends BaseTracker {
     this.amplitudeConfig = {
       includeUtm: true,
       includeReferrer: true,
-      ...(options.amplitudeConfig || {})
+      ...options.amplitudeConfig
     }
     if (this.amplitudeSDK && this.apiKey) {
       debug("initialize Amplitude for Instance %o", options.amplitudeSDK)
