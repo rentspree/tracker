@@ -2,6 +2,10 @@ import { AmplitudeTracker } from "../../src/tracker/amplitude"
 
 describe("AmplitudeTracker", () => {
   describe("constructor", () => {
+    const defaultConfig = {
+      includeUtm: true,
+      includeReferrer: true
+    }
     it("should set apiKey from option", () => {
       const amplitudeTracker = new AmplitudeTracker({ apiKey: "hello" })
       expect(amplitudeTracker.apiKey).toEqual("hello")
@@ -20,12 +24,13 @@ describe("AmplitudeTracker", () => {
         }
       })
       expect(amplitudeTracker.amplitudeConfig).toEqual({
+        ...defaultConfig,
         domain: ".test.com"
       })
     })
-    it("should set amplitudeConfig as empty object if it not exist in options", () => {
+    it("should set amplitudeConfig as the default setting if it not exist in options", () => {
       const amplitudeTracker = new AmplitudeTracker({})
-      expect(amplitudeTracker.amplitudeConfig).toEqual({})
+      expect(amplitudeTracker.amplitudeConfig).toEqual(defaultConfig)
     })
     it("should init tracker if amplitudeSDK and apiKey is exist", () => {
       const initTracker = jest.fn()
@@ -40,7 +45,7 @@ describe("AmplitudeTracker", () => {
         apiKey,
         amplitudeSDK: mockAmplitudeSDK
       })
-      expect(initTracker).toBeCalledWith(apiKey, null, {})
+      expect(initTracker).toBeCalledWith(apiKey, null, defaultConfig)
     })
     it("should init tracker with config if amplitudeSDK and apiKey is exist", () => {
       const initTracker = jest.fn()
@@ -59,6 +64,7 @@ describe("AmplitudeTracker", () => {
         }
       })
       expect(initTracker).toBeCalledWith(apiKey, null, {
+        ...defaultConfig,
         domain: ".test.com"
       })
     })
