@@ -60,33 +60,52 @@ GoogleAnalytics that receive the tracking events.
 
 -   [Tracker](#tracker)
     -   [registerTracker](#registertracker)
+        -   [Parameters](#parameters)
+        -   [Examples](#examples)
     -   [trackPageView](#trackpageview)
+        -   [Parameters](#parameters-1)
     -   [identifyUser](#identifyuser)
+        -   [Parameters](#parameters-2)
     -   [trackEvent](#trackevent)
+        -   [Parameters](#parameters-3)
     -   [setAliasUser](#setaliasuser)
+        -   [Parameters](#parameters-4)
 -   [AmplitudeTracker](#amplitudetracker)
+    -   [Parameters](#parameters-5)
     -   [getTracker](#gettracker)
     -   [identifyUser](#identifyuser-1)
+        -   [Parameters](#parameters-6)
     -   [trackEvent](#trackevent-1)
+        -   [Parameters](#parameters-7)
     -   [logout](#logout)
 -   [BaseTracker](#basetracker)
+    -   [Parameters](#parameters-8)
     -   [trackPageView](#trackpageview-1)
     -   [identifyUser](#identifyuser-2)
     -   [trackEvent](#trackevent-2)
     -   [setAliasUser](#setaliasuser-1)
 -   [FullStoryTracker](#fullstorytracker)
     -   [identifyUser](#identifyuser-3)
+        -   [Parameters](#parameters-9)
     -   [getTracker](#gettracker-1)
 -   [GATracker](#gatracker)
+    -   [Parameters](#parameters-10)
     -   [trackPageView](#trackpageview-2)
+        -   [Parameters](#parameters-11)
     -   [identifyUser](#identifyuser-4)
+        -   [Parameters](#parameters-12)
     -   [trackEvent](#trackevent-3)
+        -   [Parameters](#parameters-13)
     -   [getTracker](#gettracker-2)
 -   [MixpanelTracker](#mixpaneltracker)
     -   [trackPageView](#trackpageview-3)
+        -   [Parameters](#parameters-14)
     -   [identifyUser](#identifyuser-5)
+        -   [Parameters](#parameters-15)
     -   [trackEvent](#trackevent-4)
+        -   [Parameters](#parameters-16)
     -   [setAliasUser](#setaliasuser-2)
+        -   [Parameters](#parameters-17)
     -   [getTracker](#gettracker-3)
     -   [checkReady](#checkready)
 
@@ -101,11 +120,11 @@ and call to track all of those providers api when one event occur.
 Register the tracker Instance to track.
 Each tracker must be initialize before register to the tracker
 
-**Parameters**
+##### Parameters
 
 -   `trackerInstance` **[BaseTracker](#basetracker)** the tracker to be tracked
 
-**Examples**
+##### Examples
 
 ```javascript
 const tracker = new Tracker()
@@ -119,7 +138,7 @@ tracker.registerTracker(gaTracker)
 
 pass track pageview parameter to every registeredTracker
 
-**Parameters**
+##### Parameters
 
 -   `url` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the url to track
 -   `path` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the path to track
@@ -129,7 +148,7 @@ pass track pageview parameter to every registeredTracker
 
 pass identify user parameter to every regeisterd tracker
 
-**Parameters**
+##### Parameters
 
 -   `profile` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the profile object that will be passed through `mapUserIdentity` and `mapUserProfile` for each tracker instance.
 
@@ -137,7 +156,7 @@ pass identify user parameter to every regeisterd tracker
 
 pass track event parameter to every registered tracker
 
-**Parameters**
+##### Parameters
 
 -   `eventName` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the event name
 -   `eventProperties` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the event properties object to be passed to trackers
@@ -146,7 +165,7 @@ pass track event parameter to every registered tracker
 
 pass alias user parameter to every registered tracker
 
-**Parameters**
+##### Parameters
 
 -   `alias` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the alias to define alias of user
 
@@ -156,7 +175,7 @@ pass alias user parameter to every registered tracker
 
 The class for Amplitude tracker
 
-**Parameters**
+#### Parameters
 
 -   `options`  
 
@@ -187,7 +206,7 @@ the `mapUserProfile` should return the data with format below
  which value is the value of the key
  setOnce is indicator to set this key as unchangeable value in amplitude
 
-**Parameters**
+##### Parameters
 
 -   `profile` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the profile object
 
@@ -195,7 +214,7 @@ the `mapUserProfile` should return the data with format below
 
 track the event by calling `logEvent("event name here", properties)`
 
-**Parameters**
+##### Parameters
 
 -   `eventName` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the eventName
 -   `properties` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the properties to be passed to amplitude (optional, default `{}`)
@@ -209,7 +228,7 @@ set userId to null and generate new deviceId for handle logout user session
 
 Base for all Tracker class
 
-**Parameters**
+#### Parameters
 
 -   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** specify the tracker options
 
@@ -243,7 +262,7 @@ send the identity of this user to FullStory
 -   the user detail is the return from `options.mapUserProfile(profile)`
     The method simply call `FA.identity(options.mapUserIdentity(profile), options.mapUserProfile(profile))`
 
-**Parameters**
+##### Parameters
 
 -   `profile` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the user object
 
@@ -260,7 +279,7 @@ this method will return Proxy to avoid error
 
 The class for Google analytic tracker
 
-**Parameters**
+#### Parameters
 
 -   `options`  
 
@@ -268,7 +287,7 @@ The class for Google analytic tracker
 
 Track the page view by calling `gtag("config", trackingId, {page_locationi: url, page_path: path})`
 
-**Parameters**
+##### Parameters
 
 -   `url` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the url to track, this will be passed to `page_location` key
 -   `path` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the path, this will be passed to `page_path` key
@@ -280,7 +299,7 @@ Track the page view by calling `gtag("config", trackingId, {page_locationi: url,
 Identify the user by calling `gtag("config", ...userObject)`
 the `userObject` is a return from `options.mapUserProfile(profile)`
 
-**Parameters**
+##### Parameters
 
 -   `profile` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the profile object
 
@@ -288,7 +307,7 @@ the `userObject` is a return from `options.mapUserProfile(profile)`
 
 track the event by calling `gtag("event", eventName, properties)`
 
-**Parameters**
+##### Parameters
 
 -   `eventName` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the eventName
 -   `properties` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the properties to be passed to gtag (optional, default `{}`)
@@ -312,7 +331,7 @@ It ensure the readiness of Mixpanel.js library and prepare API for React
 
 Track the page view by calling `mixpanel.track("page viewd", ...)`
 
-**Parameters**
+##### Parameters
 
 -   `url` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the url to track
 -   `path` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the path
@@ -326,7 +345,7 @@ this will call two mixpanel methods
 -   `mixpanel.identify` sending `mapUserIdentity(profile)`
 -   `mixpanel.people.set` sending (`mapUserProfile(profile)`
 
-**Parameters**
+##### Parameters
 
 -   `profile` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the user object to be mapped and sent to Mixpanel
 -   `ip`  
@@ -335,7 +354,7 @@ this will call two mixpanel methods
 
 Track the event by calling `mixpanel.track(eventName, properties)`
 
-**Parameters**
+##### Parameters
 
 -   `eventName` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the eventName
 -   `properties` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the properties object to be passed to Mixpanel (optional, default `{}`)
@@ -344,7 +363,7 @@ Track the event by calling `mixpanel.track(eventName, properties)`
 
 Setup alias to identify user when that user signup successfully by calling `mixpanel.alias(alias)`
 
-**Parameters**
+##### Parameters
 
 -   `alias` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the alias to define alias of user
 
