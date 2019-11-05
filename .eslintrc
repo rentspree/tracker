@@ -15,10 +15,6 @@
     "flowtype-errors/show-errors": "error",
     "import/prefer-default-export": 0,
     "class-methods-use-this": "off",
-    "no-underscore-dangle": [
-      "error",
-      { "allowAfterThis": true },
-      { "allow": ["_hsq"] }
-    ]
+    "no-underscore-dangle": "off"
   }
 }
