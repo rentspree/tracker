@@ -97,16 +97,20 @@ GoogleAnalytics that receive the tracking events.
     -   [trackEvent](#trackevent-3)
         -   [Parameters](#parameters-13)
     -   [getTracker](#gettracker-2)
+-   [HubspotTracker](#hubspottracker)
+    -   [identifyUser](#identifyuser-5)
+        -   [Parameters](#parameters-14)
+    -   [getTracker](#gettracker-3)
 -   [MixpanelTracker](#mixpaneltracker)
     -   [trackPageView](#trackpageview-3)
-        -   [Parameters](#parameters-14)
-    -   [identifyUser](#identifyuser-5)
         -   [Parameters](#parameters-15)
-    -   [trackEvent](#trackevent-4)
+    -   [identifyUser](#identifyuser-6)
         -   [Parameters](#parameters-16)
-    -   [setAliasUser](#setaliasuser-2)
+    -   [trackEvent](#trackevent-4)
         -   [Parameters](#parameters-17)
-    -   [getTracker](#gettracker-3)
+    -   [setAliasUser](#setaliasuser-2)
+        -   [Parameters](#parameters-18)
+    -   [getTracker](#gettracker-4)
     -   [checkReady](#checkready)
 
 ### Tracker
@@ -318,6 +322,31 @@ Static method for getting the tracker from window
 
 Returns **([Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function) \| [Proxy](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Proxy))** the gtag function, if the function is not existed in window.gtag,
 this method will return Proxy to avoid error
+
+### HubspotTracker
+
+**Extends BaseTracker**
+
+The class for Hubspot Analytic Tracker
+
+#### identifyUser
+
+Identify the user by calling `_hsq.push(["identify",{ email: userObject.email }])`
+the `userObject` is a return from `options.mapUserIdentity(profile)`
+The Hubspot identify will not immediately create the user contact in Hubspot.
+Hubspot need to receive event or pageView after the identify to create the user contact.
+If you want to instantly create the user contact then you need to send `instantlyCreateContact` as true from `options.mapUserIdentity(profile)`
+
+##### Parameters
+
+-   `profile` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the profile object
+
+#### getTracker
+
+Static method for getting the tracker from window
+
+Returns **([object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object) \| [Proxy](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Proxy))** the Hubspot tracking sdk, if the sdk is not existed in window.\_hsq,
+this method will return proxy to prevent error
 
 ### MixpanelTracker
 
