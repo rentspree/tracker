@@ -15,10 +15,10 @@ describe("FullStory", () => {
     })
     it("should return a proxy if gtag is not available", () => {
       delete global.FA
-      const proxy = HotjarTracker.getTracker()
+      const fuc = HotjarTracker.getTracker()
       // if the returned object is a proxy it will not throw error on calling
       // some undefined function
-      expect(proxy.someFunction).not.toThrow()
+      expect(fuc).not.toThrow()
     })
   })
   describe("tracking method", () => {
