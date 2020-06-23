@@ -97,20 +97,24 @@ GoogleAnalytics that receive the tracking events.
     -   [trackEvent](#trackevent-3)
         -   [Parameters](#parameters-13)
     -   [getTracker](#gettracker-2)
--   [HubspotTracker](#hubspottracker)
+-   [HotjarTracker](#hotjartracker)
     -   [identifyUser](#identifyuser-5)
         -   [Parameters](#parameters-14)
     -   [getTracker](#gettracker-3)
+-   [HubspotTracker](#hubspottracker)
+    -   [identifyUser](#identifyuser-6)
+        -   [Parameters](#parameters-15)
+    -   [getTracker](#gettracker-4)
 -   [MixpanelTracker](#mixpaneltracker)
     -   [trackPageView](#trackpageview-3)
-        -   [Parameters](#parameters-15)
-    -   [identifyUser](#identifyuser-6)
         -   [Parameters](#parameters-16)
-    -   [trackEvent](#trackevent-4)
+    -   [identifyUser](#identifyuser-7)
         -   [Parameters](#parameters-17)
-    -   [setAliasUser](#setaliasuser-2)
+    -   [trackEvent](#trackevent-4)
         -   [Parameters](#parameters-18)
-    -   [getTracker](#gettracker-4)
+    -   [setAliasUser](#setaliasuser-2)
+        -   [Parameters](#parameters-19)
+    -   [getTracker](#gettracker-5)
     -   [checkReady](#checkready)
 
 ### Tracker
@@ -321,6 +325,30 @@ track the event by calling `gtag("event", eventName, properties)`
 Static method for getting the tracker from window
 
 Returns **([Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function) \| [Proxy](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Proxy))** the gtag function, if the function is not existed in window.gtag,
+this method will return Proxy to avoid error
+
+### HotjarTracker
+
+**Extends BaseTracker**
+
+The class for HotjarTracker tracker
+
+#### identifyUser
+
+send the identity of this user to HotjarTracker
+
+-   the identity of the user is the return from `options.mapUserIdentity(profile)`
+-   the user detail is the return from `options.mapUserProfile(profile)`
+
+##### Parameters
+
+-   `profile` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the user object
+
+#### getTracker
+
+Static method for getting the tracker from window
+
+Returns **([Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object) \| [Proxy](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Proxy))** the FA object, if the function is not existed in `window.hj`,
 this method will return Proxy to avoid error
 
 ### HubspotTracker
