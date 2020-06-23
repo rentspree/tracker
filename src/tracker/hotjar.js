@@ -9,7 +9,7 @@ const debug = createDebug("rentspree-tracker:hotjar")
 export class HotjarTracker extends BaseTracker {
   /**
    * Static method for getting the tracker from window
-   * @returns {Object | Proxy} the FA object, if the function is not existed in `window.hj`,
+   * @returns {Object | Proxy} the hj object, if the function is not existed in `window.hj`,
    * this method will return Proxy to avoid error
    * @static
    */
@@ -18,12 +18,7 @@ export class HotjarTracker extends BaseTracker {
       return window.hj
     }
     debug("warning! Seems like window.hj is not defined")
-    return new Proxy(
-      {},
-      {
-        get: () => () => {}
-      }
-    )
+    return () => {}
   }
 
   /**
