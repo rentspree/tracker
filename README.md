@@ -348,7 +348,7 @@ send the identity of this user to HotjarTracker
 
 Static method for getting the tracker from window
 
-Returns **([Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object) \| [Proxy](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Proxy))** the FA object, if the function is not existed in `window.hj`,
+Returns **([Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object) \| [Proxy](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Proxy))** the hj object, if the function is not existed in `window.hj`,
 this method will return Proxy to avoid error
 
 ### HubspotTracker
