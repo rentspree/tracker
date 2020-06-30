@@ -17,11 +17,13 @@ describe("Tracker", () => {
     jest.spyOn(base1, "identifyUser")
     jest.spyOn(base1, "trackEvent")
     jest.spyOn(base1, "setAliasUser")
+    jest.spyOn(base1, "logout")
     const base2 = new BaseTracker()
     jest.spyOn(base2, "trackPageView")
     jest.spyOn(base2, "identifyUser")
     jest.spyOn(base2, "trackEvent")
     jest.spyOn(base2, "setAliasUser")
+    jest.spyOn(base2, "logout")
     const tracker = new Tracker()
     tracker.trackers = [base1, base2]
     afterEach(() => {
@@ -30,7 +32,8 @@ describe("Tracker", () => {
           "trackPageView",
           "identifyUser",
           "trackEvent",
-          "setAliasUser"
+          "setAliasUser",
+          "logout"
         ].forEach(method => {
           t[method].mockReset()
         })
@@ -77,6 +80,14 @@ describe("Tracker", () => {
         tracker.setAliasUser("alias@gmail.com")
         tracker.trackers.forEach(t => {
           expect(t.setAliasUser).toHaveBeenCalledWith("alias@gmail.com")
+        })
+      })
+    })
+    describe("logout", () => {
+      it("should call all the tracker", () => {
+        tracker.logout()
+        tracker.trackers.forEach(t => {
+          expect(t.logout).toHaveBeenCalled()
         })
       })
     })

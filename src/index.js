@@ -71,6 +71,13 @@ export default class Tracker {
     debug("set alias user with name:%s", alias)
     this.trackers.forEach(t => t.setAliasUser && t.setAliasUser(alias))
   }
+  /**
+   * trigger logout method on each trackers
+   */
+  logout() {
+    debug("=== RentSpree tracker logout method running... ===")
+    this.trackers.forEach(t => t.logout && t.logout())
+  }
 }
 
 export { FullStoryTracker } from "./tracker/fullstory"
