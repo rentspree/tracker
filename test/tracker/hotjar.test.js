@@ -1,10 +1,17 @@
+import { setLocalItem, getLocalItem } from "@rentspree/cookie"
+
 import { HotjarTracker } from "../../src/tracker/hotjar"
+import {
+  setLocalStorageItem,
+  getLocalStorageItem
+} from "../../src/utils/window"
 
 describe("FullStory", () => {
   describe("getTracker", () => {
     afterEach(() => {
       global.hj = undefined
     })
+
     it("should return object if it has one", () => {
       global.hj = { key1: true }
       expect(HotjarTracker.getTracker()).toEqual(
@@ -13,6 +20,7 @@ describe("FullStory", () => {
         })
       )
     })
+
     it("should return a proxy if gtag is not available", () => {
       delete global.FA
       const fuc = HotjarTracker.getTracker()
@@ -21,6 +29,7 @@ describe("FullStory", () => {
       expect(fuc).not.toThrow()
     })
   })
+
   describe("tracking method", () => {
     const hotjarTracker = new HotjarTracker({
       mapUserIdentity: profile => profile._id, // eslint-disable-line no-underscore-dangle
@@ -32,15 +41,19 @@ describe("FullStory", () => {
     const getTrackerMock = jest.fn()
     const hjTrackerMock = jest.fn()
     getTrackerMock.mockReturnValue(hjTrackerMock)
+
     beforeAll(() => {
       HotjarTracker.getTracker = getTrackerMock
     })
+
     afterAll(() => {
       HotjarTracker.getTracker.mockRestore()
     })
+
     afterEach(() => {
       hjTrackerMock.mockReset()
     })
+
     describe("identifyUser", () => {
       it("should call hj identify with the correct parameter", () => {
         hotjarTracker.identifyUser({
@@ -53,6 +66,17 @@ describe("FullStory", () => {
           email: "my-email",
           name: "John Doe"
         })
+      })
+    })
+
+    describe("logout", () => {
+      const hjSessionKeyName = "_hjid"
+      it("should be able to remove Hotjar session when assigned correct session key name", () => {
+        setLocalStorageItem(hjSessionKeyName, "hotjar_local_storage_id")
+        setLocalItem(hjSessionKeyName, "hotjar_cookie_id")
+        hotjarTracker.logout()
+        expect(getLocalStorageItem(hjSessionKeyName)).toEqual(null)
+        expect(getLocalItem(hjSessionKeyName)).toEqual(false)
       })
     })
   })

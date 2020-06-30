@@ -41,4 +41,9 @@ export class BaseTracker {
    * Dummy function for set alias of user
    */
   setAliasUser() {}
+
+  /**
+   * Dummy function for user logged out
+   */
+  logout() {}
 }

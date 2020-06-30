@@ -70,6 +70,7 @@ GoogleAnalytics that receive the tracking events.
         -   [Parameters](#parameters-3)
     -   [setAliasUser](#setaliasuser)
         -   [Parameters](#parameters-4)
+    -   [logout](#logout)
 -   [AmplitudeTracker](#amplitudetracker)
     -   [Parameters](#parameters-5)
     -   [getTracker](#gettracker)
@@ -77,13 +78,14 @@ GoogleAnalytics that receive the tracking events.
         -   [Parameters](#parameters-6)
     -   [trackEvent](#trackevent-1)
         -   [Parameters](#parameters-7)
-    -   [logout](#logout)
+    -   [logout](#logout-1)
 -   [BaseTracker](#basetracker)
     -   [Parameters](#parameters-8)
     -   [trackPageView](#trackpageview-1)
     -   [identifyUser](#identifyuser-2)
     -   [trackEvent](#trackevent-2)
     -   [setAliasUser](#setaliasuser-1)
+    -   [logout](#logout-2)
 -   [FullStoryTracker](#fullstorytracker)
     -   [identifyUser](#identifyuser-3)
         -   [Parameters](#parameters-9)
@@ -97,20 +99,26 @@ GoogleAnalytics that receive the tracking events.
     -   [trackEvent](#trackevent-3)
         -   [Parameters](#parameters-13)
     -   [getTracker](#gettracker-2)
--   [HubspotTracker](#hubspottracker)
+-   [HotjarTracker](#hotjartracker)
+    -   [Parameters](#parameters-14)
     -   [identifyUser](#identifyuser-5)
-        -   [Parameters](#parameters-14)
-    -   [getTracker](#gettracker-3)
--   [MixpanelTracker](#mixpaneltracker)
-    -   [trackPageView](#trackpageview-3)
         -   [Parameters](#parameters-15)
+    -   [logout](#logout-3)
+    -   [getTracker](#gettracker-3)
+-   [HubspotTracker](#hubspottracker)
     -   [identifyUser](#identifyuser-6)
         -   [Parameters](#parameters-16)
-    -   [trackEvent](#trackevent-4)
-        -   [Parameters](#parameters-17)
-    -   [setAliasUser](#setaliasuser-2)
-        -   [Parameters](#parameters-18)
     -   [getTracker](#gettracker-4)
+-   [MixpanelTracker](#mixpaneltracker)
+    -   [trackPageView](#trackpageview-3)
+        -   [Parameters](#parameters-17)
+    -   [identifyUser](#identifyuser-7)
+        -   [Parameters](#parameters-18)
+    -   [trackEvent](#trackevent-4)
+        -   [Parameters](#parameters-19)
+    -   [setAliasUser](#setaliasuser-2)
+        -   [Parameters](#parameters-20)
+    -   [getTracker](#gettracker-5)
     -   [checkReady](#checkready)
 
 ### Tracker
@@ -172,6 +180,10 @@ pass alias user parameter to every registered tracker
 ##### Parameters
 
 -   `alias` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the alias to define alias of user
+
+#### logout
+
+trigger logout method on each trackers
 
 ### AmplitudeTracker
 
@@ -252,6 +264,10 @@ Dummy function for track event
 
 Dummy function for set alias of user
 
+#### logout
+
+Dummy function for user logged out
+
 ### FullStoryTracker
 
 **Extends BaseTracker**
@@ -321,6 +337,39 @@ track the event by calling `gtag("event", eventName, properties)`
 Static method for getting the tracker from window
 
 Returns **([Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function) \| [Proxy](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Proxy))** the gtag function, if the function is not existed in window.gtag,
+this method will return Proxy to avoid error
+
+### HotjarTracker
+
+**Extends BaseTracker**
+
+The class for HotjarTracker tracker
+
+#### Parameters
+
+-   `args` **...any** 
+
+#### identifyUser
+
+send the identity of this user to HotjarTracker
+
+-   the identity of the user is the return from `options.mapUserIdentity(profile)`
+-   the user detail is the return from `options.mapUserProfile(profile)`
+
+##### Parameters
+
+-   `profile` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the user object
+
+#### logout
+
+This method is removing Hotjar session with Local Storage and Cookie
+for getting a newer Hotjar session for recording correct a new user logged in
+
+#### getTracker
+
+Static method for getting the tracker from window
+
+Returns **([Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object) \| [Proxy](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Proxy))** the hj object, if the function is not existed in `window.hj`,
 this method will return Proxy to avoid error
 
 ### HubspotTracker
