@@ -17,8 +17,8 @@ describe("UserRecorderTracker", () => {
 
     it("should return a proxy if user recorder object is not available", () => {
       delete global.userRecorder
-      const fuc = UserRecorderTracker.getTracker()
-      expect(fuc).not.toThrow()
+      const proxy = UserRecorderTracker.getTracker()
+      expect(proxy.someFunction).not.toThrow()
     })
   })
 
