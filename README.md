@@ -120,6 +120,11 @@ GoogleAnalytics that receive the tracking events.
         -   [Parameters](#parameters-20)
     -   [getTracker](#gettracker-5)
     -   [checkReady](#checkready)
+-   [UserRecorderTracker](#userrecordertracker)
+    -   [identifyUser](#identifyuser-8)
+        -   [Parameters](#parameters-21)
+    -   [logout](#logout-4)
+    -   [getTracker](#gettracker-6)
 
 ### Tracker
 
@@ -457,6 +462,32 @@ this method will return Proxy to avoid error
 Check if mixpanel object is ready by checking \`window.mixpanel.\_\_loaded
 
 Returns **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** wether the mixpanel object is ready
+
+### UserRecorderTracker
+
+**Extends BaseTracker**
+
+This class for capturing user behavior and user reaction on the website
+
+#### identifyUser
+
+identity the user information to provider script for mapping user on user recording provider
+
+##### Parameters
+
+-   `profile` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the user data object
+
+#### logout
+
+This method is removing session recording with Local Storage and Cookie
+for getting a newer recording session for recording correct a new user logged in
+
+#### getTracker
+
+Static method for getting the tracker from window
+
+Returns **([Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object) \| [Proxy](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Proxy))** the user-recorder object from the provider
+if the function is not existed, this method will return Proxy to avoid error
 
 ## License
 
