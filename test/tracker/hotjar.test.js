@@ -23,8 +23,10 @@ describe("HotjarTracker", () => {
 
     it("should return a proxy if Hotjar object is not available", () => {
       delete global.hj
-      const proxy = HotjarTracker.getTracker()
-      expect(proxy.someFunction).not.toThrow()
+      const fuc = HotjarTracker.getTracker()
+      // if the returned object is a proxy it will not throw error on calling
+      // some undefined function
+      expect(fuc).not.toThrow()
     })
   })
 
