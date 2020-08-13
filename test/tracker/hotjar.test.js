@@ -6,7 +6,7 @@ import {
   getLocalStorageItem
 } from "../../src/utils/window"
 
-describe("FullStory", () => {
+describe("HotjarTracker", () => {
   describe("getTracker", () => {
     afterEach(() => {
       global.hj = undefined
@@ -21,7 +21,7 @@ describe("FullStory", () => {
       )
     })
 
-    it("should return a proxy if gtag is not available", () => {
+    it("should return a proxy if Hotjar object is not available", () => {
       delete global.FA
       const fuc = HotjarTracker.getTracker()
       // if the returned object is a proxy it will not throw error on calling
