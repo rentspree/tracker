@@ -19,12 +19,7 @@ export class UserRecorderTracker extends BaseTracker {
       return window.userRecorder
     }
     debug("Warning! Seems like window.userRecorder is undefined")
-    return new Proxy(
-      {},
-      {
-        get: () => () => {}
-      }
-    )
+    return () => {}
   }
 
   /**
@@ -34,7 +29,7 @@ export class UserRecorderTracker extends BaseTracker {
   identifyUser(profile) {
     debug("=== UserRecorderTracker identifyUser is running... 💫 ===")
     debug("user data %o => ", profile)
-    UserRecorderTracker.getTracker()("identify", profile)
+    UserRecorderTracker.getTracker().identify(profile)
     debug("=== UserRecorderTracker identifyUser finished ✅ ===")
   }
 
@@ -44,7 +39,7 @@ export class UserRecorderTracker extends BaseTracker {
    */
   logout() {
     debug("=== UserRecorderTracker logout is running... 💫  ===")
-    UserRecorderTracker.getTracker()("clearSession")
+    UserRecorderTracker.getTracker().clearSession()
     debug("=== UserRecorderTracker logout finished ✅ ===")
   }
 }
