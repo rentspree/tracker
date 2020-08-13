@@ -39,7 +39,7 @@ export class UserRecorderTracker extends BaseTracker {
    */
   logout() {
     debug("=== UserRecorderTracker logout is running... 💫  ===")
-    UserRecorderTracker.getTracker()("logout")
+    UserRecorderTracker.getTracker()("clearSession")
     debug("=== UserRecorderTracker logout finished ✅ ===")
   }
 }

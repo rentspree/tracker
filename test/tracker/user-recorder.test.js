@@ -56,7 +56,7 @@ describe("UserRecorderTracker", () => {
     describe("logout", () => {
       it("should be able to trigger logout method on session recording script", () => {
         userRecorderTracker.logout()
-        expect(userRecorderTrackerMock).toBeCalledWith("logout")
+        expect(userRecorderTrackerMock).toBeCalledWith("clearSession")
       })
     })
   })
