@@ -14,7 +14,7 @@ describe("FullStory", () => {
       )
     })
     it("should return a proxy if gtag is not available", () => {
-      delete global.FA
+      delete global.FS
       const proxy = FullStoryTracker.getTracker()
       // if the returned object is a proxy it will not throw error on calling
       // some undefined function

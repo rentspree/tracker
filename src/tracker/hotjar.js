@@ -26,7 +26,12 @@ export class HotjarTracker extends BaseTracker {
       return window.hj
     }
     debug("warning! Seems like window.hj is not defined")
-    return () => {}
+    return new Proxy(
+      {},
+      {
+        get: () => () => {}
+      }
+    )
   }
 
   /**
