@@ -19,7 +19,12 @@ export class UserRecorderTracker extends BaseTracker {
       return window.userRecorder
     }
     debug("Warning! Seems like window.userRecorder is undefined")
-    return () => {}
+    return new Proxy(
+      {},
+      {
+        get: () => () => {}
+      }
+    )
   }
 
   /**
