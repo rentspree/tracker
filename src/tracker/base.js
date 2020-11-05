@@ -33,6 +33,11 @@ export class BaseTracker {
   identifyUser() {}
 
   /**
+   * Dummy function for identify user on the amplitude only
+   */
+  identifyAmplitude() {}
+
+  /**
    * Dummy function for track event
    */
   trackEvent() {}

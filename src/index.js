@@ -1,5 +1,7 @@
 import createDebug from "debug"
 
+import { AMPLITUDE_TRACKER } from "./constants/amplitude"
+
 const debug = createDebug("rentspree-tracker:main")
 
 /**
@@ -28,7 +30,7 @@ export default class Tracker {
     this.trackers.push(trackerInstance)
   }
   /**
-   * pass track pageview parameter to every registeredTracker
+   * pass track page view parameter to every registeredTracker
    * @param {String} url the url to track
    * @param {String} path the path to track
    * @param {Object} properties the additional properties object to be passed to trackers
@@ -39,18 +41,30 @@ export default class Tracker {
       path,
       properties
     }
-    debug("track pageview for object %0", obj)
+    debug("track page view for object %0", obj)
     this.trackers.forEach(
       t => t.trackPageView && t.trackPageView(url, path, properties)
     )
   }
   /**
-   * pass identify user parameter to every regeisterd tracker
+   * pass identify user parameter to every registered tracker
    * @param {Object} profile the profile object that will be passed through `mapUserIdentity` and `mapUserProfile` for each tracker instance.
    */
   identifyUser(profile) {
     debug("identify user %O", profile)
     this.trackers.forEach(t => t.identifyUser && t.identifyUser(profile))
+  }
+  /**
+   * pass identify user on the amplitude only
+   * @param {Object} profile the profile object that will be passed through `mapUserIdentity` and `mapUserProfile` for only amplitude tracker instance.
+   */
+  identifyAmplitude(profile) {
+    debug("identify user for the amplitude only %O", profile)
+    this.trackers.forEach(t => {
+      const trackerClassName = t.constructor.name
+      if (trackerClassName === AMPLITUDE_TRACKER.CLASS_NAME)
+        t.identifyUser(profile)
+    })
   }
   /**
    * pass track event parameter to every registered tracker
