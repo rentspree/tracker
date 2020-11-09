@@ -62,6 +62,10 @@ export default class Tracker {
     debug("identify user for the amplitude only %O", profile)
     this.trackers.forEach(t => {
       const trackerClassName = t.constructor.name
+      debug(
+        "identify user amplitude tracker class name => %s",
+        trackerClassName
+      )
       if (trackerClassName === AMPLITUDE_TRACKER.CLASS_NAME)
         t.identifyUser(profile)
     })
