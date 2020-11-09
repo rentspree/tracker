@@ -76,6 +76,15 @@ export class AmplitudeTracker extends BaseTracker {
     this.getTracker().identify(amplitudeUserIdentifierObj)
   }
 
+  /**
+   * This method is identifying for the amplitude analytics only
+   * @param {Object} profile the user profile data
+   */
+  identifyAmplitude(profile) {
+    debug("identify user for the amplitude only %O", profile)
+    this.identifyUser(profile)
+  }
+
   _setUserProperties(mappedProfile = {}) {
     const identifyObj = new this.amplitudeSDK.Identify()
     const keys = Object.keys(mappedProfile)

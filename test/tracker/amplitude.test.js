@@ -178,6 +178,26 @@ describe("AmplitudeTracker", () => {
         expect(setIdentityMock).toBeCalledWith(identifyObj)
       })
     })
+    describe("identifyAmplitude", () => {
+      let identifyUserSpy
+      beforeEach(() => {
+        identifyUserSpy = jest.spyOn(amplitudeTracker, "identifyUser")
+      })
+
+      afterEach(() => {
+        identifyUserSpy.mockClear()
+      })
+
+      afterAll(() => {
+        identifyUserSpy.mockRestore()
+      })
+
+      it("should call `identifyUser` method when calling `identifyAmplitude` method", () => {
+        const profile = { email: "identify@only.amplitude" }
+        amplitudeTracker.identifyAmplitude(profile)
+        expect(identifyUserSpy).toHaveBeenCalledWith(profile)
+      })
+    })
     describe("_setUserProperties", () => {
       afterEach(() => {
         setValue = {}

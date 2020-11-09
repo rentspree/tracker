@@ -155,15 +155,16 @@ describe("Tracker", () => {
 
     it("should able to call identify user on the `Amplitude` by calling `identifyAmplitude` method", () => {
       tracker.trackers = [amplitudeTracker, userRecorderTracker, hubspotTracker]
-      tracker.identifyAmplitude({ email: userEmail })
-      expect(identifyUserAmplitude).toHaveBeenCalled()
+      const profile = { email: userEmail }
+      tracker.identifyAmplitude(profile)
+      expect(identifyUserAmplitude).toHaveBeenCalledWith(profile)
     })
 
-    it("should not call any analytics identify user method when the tracker don't have the amplitude class", () => {
+    it("should not call any analytics identify user method when the tracker doesn't have the `identifyAmplitude` method", () => {
       tracker.trackers = [userRecorderTracker, hubspotTracker]
       tracker.identifyAmplitude({ email: userEmail })
       tracker.trackers.forEach(t => {
-        expect(t.identifyUser).not.toHaveBeenCalledWith({ email: userEmail })
+        expect(t.identifyUser).not.toHaveBeenCalled()
       })
     })
   })

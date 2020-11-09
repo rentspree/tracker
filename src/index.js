@@ -1,7 +1,5 @@
 import createDebug from "debug"
 
-import { AMPLITUDE_TRACKER } from "./constants/amplitude"
-
 const debug = createDebug("rentspree-tracker:main")
 
 /**
@@ -59,16 +57,10 @@ export default class Tracker {
    * @param {Object} profile the profile object that will be passed through `mapUserIdentity` and `mapUserProfile` for only amplitude tracker instance.
    */
   identifyAmplitude(profile) {
-    debug("identify user for the amplitude only %O", profile)
-    this.trackers.forEach(t => {
-      const trackerClassName = t.constructor.name
-      debug(
-        "identify user amplitude tracker class name => %s",
-        trackerClassName
-      )
-      if (trackerClassName === AMPLITUDE_TRACKER.CLASS_NAME)
-        t.identifyUser(profile)
-    })
+    debug("identify amplitude user %O", profile)
+    this.trackers.forEach(
+      t => t.identifyAmplitude && t.identifyAmplitude(profile)
+    )
   }
   /**
    * pass track event parameter to every registered tracker
