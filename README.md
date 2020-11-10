@@ -66,63 +66,68 @@ GoogleAnalytics that receive the tracking events.
         -   [Parameters](#parameters-1)
     -   [identifyUser](#identifyuser)
         -   [Parameters](#parameters-2)
-    -   [trackEvent](#trackevent)
+    -   [identifyAmplitude](#identifyamplitude)
         -   [Parameters](#parameters-3)
-    -   [setAliasUser](#setaliasuser)
+    -   [trackEvent](#trackevent)
         -   [Parameters](#parameters-4)
+    -   [setAliasUser](#setaliasuser)
+        -   [Parameters](#parameters-5)
     -   [logout](#logout)
 -   [AmplitudeTracker](#amplitudetracker)
-    -   [Parameters](#parameters-5)
+    -   [Parameters](#parameters-6)
     -   [getTracker](#gettracker)
     -   [identifyUser](#identifyuser-1)
-        -   [Parameters](#parameters-6)
-    -   [trackEvent](#trackevent-1)
         -   [Parameters](#parameters-7)
+    -   [identifyAmplitude](#identifyamplitude-1)
+        -   [Parameters](#parameters-8)
+    -   [trackEvent](#trackevent-1)
+        -   [Parameters](#parameters-9)
     -   [logout](#logout-1)
 -   [BaseTracker](#basetracker)
-    -   [Parameters](#parameters-8)
+    -   [Parameters](#parameters-10)
     -   [trackPageView](#trackpageview-1)
     -   [identifyUser](#identifyuser-2)
+    -   [identifyAmplitude](#identifyamplitude-2)
     -   [trackEvent](#trackevent-2)
     -   [setAliasUser](#setaliasuser-1)
     -   [logout](#logout-2)
 -   [FullStoryTracker](#fullstorytracker)
     -   [identifyUser](#identifyuser-3)
-        -   [Parameters](#parameters-9)
+        -   [Parameters](#parameters-11)
     -   [getTracker](#gettracker-1)
 -   [GATracker](#gatracker)
-    -   [Parameters](#parameters-10)
+    -   [Parameters](#parameters-12)
     -   [trackPageView](#trackpageview-2)
-        -   [Parameters](#parameters-11)
-    -   [identifyUser](#identifyuser-4)
-        -   [Parameters](#parameters-12)
-    -   [trackEvent](#trackevent-3)
         -   [Parameters](#parameters-13)
+    -   [identifyUser](#identifyuser-4)
+        -   [Parameters](#parameters-14)
+    -   [trackEvent](#trackevent-3)
+        -   [Parameters](#parameters-15)
     -   [getTracker](#gettracker-2)
 -   [HotjarTracker](#hotjartracker)
-    -   [Parameters](#parameters-14)
+    -   [Parameters](#parameters-16)
     -   [identifyUser](#identifyuser-5)
-        -   [Parameters](#parameters-15)
+        -   [Parameters](#parameters-17)
     -   [logout](#logout-3)
     -   [getTracker](#gettracker-3)
 -   [HubspotTracker](#hubspottracker)
     -   [identifyUser](#identifyuser-6)
-        -   [Parameters](#parameters-16)
+        -   [Parameters](#parameters-18)
     -   [getTracker](#gettracker-4)
 -   [MixpanelTracker](#mixpaneltracker)
     -   [trackPageView](#trackpageview-3)
-        -   [Parameters](#parameters-17)
-    -   [identifyUser](#identifyuser-7)
-        -   [Parameters](#parameters-18)
-    -   [trackEvent](#trackevent-4)
         -   [Parameters](#parameters-19)
-    -   [setAliasUser](#setaliasuser-2)
+    -   [identifyUser](#identifyuser-7)
         -   [Parameters](#parameters-20)
+    -   [trackEvent](#trackevent-4)
+        -   [Parameters](#parameters-21)
+    -   [setAliasUser](#setaliasuser-2)
+        -   [Parameters](#parameters-22)
     -   [getTracker](#gettracker-5)
     -   [checkReady](#checkready)
 -   [UserRecorderTracker](#userrecordertracker)
     -   [identifyUser](#identifyuser-8)
-        -   [Parameters](#parameters-21)
+        -   [Parameters](#parameters-23)
     -   [logout](#logout-4)
     -   [getTracker](#gettracker-6)
 
@@ -153,7 +158,7 @@ tracker.registerTracker(gaTracker)
 
 #### trackPageView
 
-pass track pageview parameter to every registeredTracker
+pass track page view parameter to every registeredTracker
 
 ##### Parameters
 
@@ -163,11 +168,19 @@ pass track pageview parameter to every registeredTracker
 
 #### identifyUser
 
-pass identify user parameter to every regeisterd tracker
+pass identify user parameter to every registered tracker
 
 ##### Parameters
 
 -   `profile` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the profile object that will be passed through `mapUserIdentity` and `mapUserProfile` for each tracker instance.
+
+#### identifyAmplitude
+
+pass identify user on the amplitude only
+
+##### Parameters
+
+-   `profile` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the profile object that will be passed through `mapUserIdentity` and `mapUserProfile` for only amplitude tracker instance.
 
 #### trackEvent
 
@@ -231,6 +244,14 @@ the `mapUserProfile` should return the data with format below
 
 -   `profile` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the profile object
 
+#### identifyAmplitude
+
+This method is identifying for the amplitude analytics only
+
+##### Parameters
+
+-   `profile` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** the user profile data
+
 #### trackEvent
 
 track the event by calling `logEvent("event name here", properties)`
@@ -260,6 +281,10 @@ Dummy function for tracking page view
 #### identifyUser
 
 Dummy function for identify user
+
+#### identifyAmplitude
+
+Dummy function for identify user on the amplitude only
 
 #### trackEvent
 
