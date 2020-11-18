@@ -266,6 +266,14 @@ track the event by calling `logEvent("event name here", properties)`
 generate new session for amplitude tracker when user logout
 set userId to null and generate new deviceId for handle logout user session
 
+### 
+
+MOMO-1138
+
+### 
+
+MOMO-1138
+
 ### BaseTracker
 
 Base for all Tracker class

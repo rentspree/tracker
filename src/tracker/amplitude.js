@@ -114,12 +114,10 @@ export class AmplitudeTracker extends BaseTracker {
 
   /**
    * generate new session for amplitude tracker when user logout
-   * set userId to null and generate new deviceId for handle logout user session
+   * set userId to null
    */
   logout() {
     debug("set amplitude user to null")
     this.getTracker().setUserId(null)
-    debug("generate new device id for amplitude")
-    this.getTracker().regenerateDeviceId()
   }
 }

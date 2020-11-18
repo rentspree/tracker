@@ -283,7 +283,8 @@ describe("AmplitudeTracker", () => {
         amplitudeTracker.logout()
         expect(setUserIdMock).toBeCalledWith(null)
       })
-      it("should call regenerateDeviceId", () => {
+      /** regenerateDeviceId is removed in MOMO-1138 */
+      xit("should call regenerateDeviceId", () => {
         amplitudeTracker.logout()
         expect(regenerateDeviceIdMock).toBeCalled()
       })
