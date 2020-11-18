@@ -1,3 +1,7 @@
+## [0.3.8](https://github.com/rentspree/tracker/compare/v0.3.8-alpha.0...v0.3.8) (2020-11-18)
+
+
+
 ## [0.3.8-alpha.0](https://github.com/rentspree/tracker/compare/v0.3.7...v0.3.8-alpha.0) (2020-11-18)
 
 
