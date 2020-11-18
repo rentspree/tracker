@@ -119,7 +119,9 @@ export class AmplitudeTracker extends BaseTracker {
   logout() {
     debug("set amplitude user to null")
     this.getTracker().setUserId(null)
-    debug("generate new device id for amplitude")
-    this.getTracker().regenerateDeviceId()
+    /** MOMO-1138 */
+    // debug("generate new device id for amplitude")
+    // this.getTracker().regenerateDeviceId()
+    /** MOMO-1138 */
   }
 }

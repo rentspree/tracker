@@ -283,10 +283,12 @@ describe("AmplitudeTracker", () => {
         amplitudeTracker.logout()
         expect(setUserIdMock).toBeCalledWith(null)
       })
-      it("should call regenerateDeviceId", () => {
-        amplitudeTracker.logout()
-        expect(regenerateDeviceIdMock).toBeCalled()
-      })
+      /** MOMO-1138 */
+      // it("should call regenerateDeviceId", () => {
+      //   amplitudeTracker.logout()
+      //   expect(regenerateDeviceIdMock).toBeCalled()
+      // })
+      /** MOMO-1138 */
     })
   })
 })
