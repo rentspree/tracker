@@ -46,14 +46,14 @@
   ],
   "dependencies": {
     "@rentspree/cookie": "^1.0.9",
-    "debug": "^3.1.0",
-    "lodash": "^4.17.10"
+    "debug": "^3.2.7",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@babel/cli": "7.2.3",
     "@babel/core": "7.2.2",
     "@babel/preset-env": "7.2.3",
-    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-flow": "^7.22.15",
     "babel-eslint": "^9.0.0",
     "documentation": "^11.0.1",
     "eslint": "^4.19.1",
@@ -61,17 +61,17 @@
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-flowtype": "^2.46.1",
     "eslint-plugin-flowtype-errors": "^3.5.1",
-    "eslint-plugin-import": "^2.10.0",
+    "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-prettier": "^2.6.0",
     "flow-bin": "^0.73.0",
     "flow-copy-source": "^1.3.0",
-    "jest-cli": "^24.8.0",
+    "jest-cli": "^24.9.0",
     "jsdom": "^11.12.0",
     "npm-watch": "^0.6.0",
     "opn-cli": "^3.1.0",
     "prettier": "1.18.2",
-    "rimraf": "^2.6.2",
-    "standard-changelog": "^2.0.11"
+    "rimraf": "^2.7.1",
+    "standard-changelog": "^2.0.27"
   },
   "publishConfig": {
     "access": "public"
