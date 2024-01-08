@@ -26,7 +26,6 @@ export class AmplitudeTracker extends BaseTracker {
       debug("initialize Amplitude with Config %o", this.amplitudeConfig)
       this.getTracker().init(this.apiKey, null, this.amplitudeConfig)
     }
-    this.pushToDataLayer = options.pushToDataLayer === false ? false : true
   }
   /**
    * Static method for getting the amplitude tracker
@@ -111,9 +110,6 @@ export class AmplitudeTracker extends BaseTracker {
       properties
     )
     this.getTracker().logEvent(eventName, properties)
-    if (this.pushToDataLayer && window.dataLayer) {
-      window.dataLayer.push({ event: eventName, properties })
-    }
   }
 
   /**

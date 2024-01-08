@@ -19,7 +19,7 @@ export default class Tracker {
    * const tracker = new Tracker()
    * const gaTracker = new GATracker({trackerId: "hello-tracker"})
    * tracker.registerTracker(gaTracker)
-   * // with this the gaTracker event handler will be fired everytime
+   * // with this the gaTracker event handler will be fired every time
    * // the tracker got an event
    * @param {BaseTracker} trackerInstance the tracker to be tracked
    */
@@ -98,3 +98,4 @@ export { AmplitudeTracker } from "./tracker/amplitude"
 export { HubspotTracker } from "./tracker/hubspot"
 export { HotjarTracker } from "./tracker/hotjar"
 export { UserRecorderTracker } from "./tracker/user-recorder"
+export { GTMTracker } from "./tracker/gtm"

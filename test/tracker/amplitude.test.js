@@ -256,47 +256,19 @@ describe("AmplitudeTracker", () => {
     })
 
     describe("trackEvent", () => {
-      const eventName = "test"
-      const properties = {
-        name: "a"
-      }
-      const mockDataLayerPush = jest.fn()
-      global.dataLayer = { push: mockDataLayerPush }
       afterEach(() => {
         logEventMock.mockClear()
         setUserIdMock.mockClear()
         setIdentityMock.mockClear()
         regenerateDeviceIdMock.mockClear()
-        mockDataLayerPush.mockClear()
       })
       it("should call logEvent with param", () => {
+        const eventName = "test"
+        const properties = {
+          name: "a"
+        }
         amplitudeTracker.trackEvent(eventName, properties)
         expect(logEventMock).toBeCalledWith(eventName, properties)
-      })
-      it("should call dataLayer.push with param if pushToDataLayer attribute is true by default and dataLayer exists", () => {
-        amplitudeTracker.trackEvent(eventName, properties)
-        expect(mockDataLayerPush).toBeCalledWith({ event: eventName, properties })
-      })
-      it("should not call dataLayer.push with param if pushToDataLayer attribute is false, although dataLayer exists", () => {
-        const amplitudeTracker = new AmplitudeTracker({
-          apiKey,
-          amplitudeSDK: mockAmplitudeSDK,
-          mapUserIdentity: profile => profile.id,
-          mapUserProfile: profile => ({
-            id: {
-              value: profile.id,
-              setOnce: true
-            }
-          }),
-          pushToDataLayer: false
-        })
-        amplitudeTracker.trackEvent(eventName, properties)
-        expect(mockDataLayerPush).not.toBeCalled()
-      })
-      it("should call dataLayer.push with param if pushToDataLayer attribute is true by default but dataLayer doesn't exist", () => {
-        global.dataLayer = undefined
-        amplitudeTracker.trackEvent(eventName, properties)
-        expect(mockDataLayerPush).not.toBeCalled()
       })
     })
 
