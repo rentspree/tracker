@@ -20,7 +20,7 @@ jobs:
       - run: npm run build
       - uses: actions/upload-artifact@v3
         with:
-          name: tracker-build
+          name: tracker-dist
           path: dist
           retention-days: 1
 
