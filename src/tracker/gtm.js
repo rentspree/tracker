@@ -1,6 +1,5 @@
 import createDebug from "debug"
 import { BaseTracker } from "./base"
-import has from "lodash/has"
 
 const debug = createDebug("rentspree-tracker:gtm")
 
@@ -37,7 +36,7 @@ export class GTMTracker extends BaseTracker {
 
   /**
    * identify the user and set the userId attribute`
-   * the `userObject` is a return from `options.mapUserProfile(profile)`
+   * the `userObject` is returned from `options.mapUserProfile(profile)`
    * @param {Object} profile the profile object
    */
   identifyUser(profile) {
@@ -47,9 +46,9 @@ export class GTMTracker extends BaseTracker {
   }
 
   /**
-   * track the event by calling `logEvent("event name here", properties)`
-   * @param {String} eventName the eventName
-   * @param {Object} properties the properties to be passed to amplitude
+   * track the event by calling dataLayer.push({ userId, event: eventName, properties })
+   * @param {String} eventName the event's name
+   * @param {Object} properties the properties to be passed to data layer
    */
   trackEvent(eventName, properties = {}) {
     debug(
