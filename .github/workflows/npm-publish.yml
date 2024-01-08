@@ -4,9 +4,8 @@
 name: Node.js Package
 
 on:
-  push:
-    tags:
-      - v*
+  release:
+    types: [created]
 
 jobs:
   build:
@@ -21,7 +20,7 @@ jobs:
       - run: npm run build
       - uses: actions/upload-artifact@v3
         with:
-          name: tracker-dist
+          name: tracker-build
           path: dist
           retention-days: 1
 
@@ -38,6 +37,4 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: tracker-dist
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+      - run: ls
