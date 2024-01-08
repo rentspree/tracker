@@ -37,4 +37,5 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: tracker-dist
+          path: dist
       - run: ls
