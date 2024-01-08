@@ -32,6 +32,35 @@ describe("GTMTracker", () => {
     })
   })
 
+  describe("getSpecificTracker", () => {
+    const gtmTracker = new GTMTracker({
+      trackingId
+    })
+
+    afterEach(() => {
+      global['google_tag_manager'] = undefined
+    })
+
+    it("should return dataLayer object if it exists", () => {
+      global['google_tag_manager'] = {
+        [trackingId]: {
+          dataLayer: {
+            foo: 'bar'
+          }
+        }
+      }
+      expect(gtmTracker.getSpecificDataLayer()).toEqual(
+        expect.objectContaining({
+          foo: 'bar'
+        })
+      )
+    })
+    it("should return a undefined if dataLayer is not available", () => {
+      delete global['google_tag_manager']
+      expect(gtmTracker.getSpecificDataLayer()).toEqual(undefined)
+    })
+  })
+
   describe("tracking function", () => {
     const gtmTracker = new GTMTracker({
       trackingId,
@@ -42,22 +71,23 @@ describe("GTMTracker", () => {
     const userId = 1
     const mockDataLayerSet = jest.fn()
     const mockDataLayerGet = jest.fn()
-    global['google_tag_manager'] = {
-      [trackingId]: {
-        dataLayer: {
-          set: mockDataLayerSet,
-          get: mockDataLayerGet
-        }
-      }
-    }
-    const getTrackerMock = jest.fn()
+    
+    const mockGetTracker = jest.fn()
     const mockDataLayerPush = jest.fn()
-    getTrackerMock.mockReturnValue({
+    mockGetTracker.mockReturnValue({
       push: mockDataLayerPush
     })
 
     beforeAll(() => {
-      GTMTracker.getTracker = getTrackerMock
+      GTMTracker.getTracker = mockGetTracker
+      global['google_tag_manager'] = {
+        [trackingId]: {
+          dataLayer: {
+            set: mockDataLayerSet,
+            get: mockDataLayerGet
+          }
+        }
+      }
     })
     
     afterEach(() => {

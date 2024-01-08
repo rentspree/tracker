@@ -1,5 +1,6 @@
 import createDebug from "debug"
 import { BaseTracker } from "./base"
+import has from "lodash/has"
 
 const debug = createDebug("rentspree-tracker:gtm")
 
@@ -32,19 +33,36 @@ export class GTMTracker extends BaseTracker {
     )
   }
 
+  getSpecificDataLayer() {
+    if (has(window, `google_tag_manager.${this.trackingId}.dataLayer`)) {
+      return window['google_tag_manager'][this.trackingId].dataLayer
+    }
+    return undefined
+  } 
+
   /**
-   * Identify the user by calling `gtag("config", ...userObject)`
+   * identify the user and set it to data layer by calling `window['google_tag_manager'][this.trackingId].dataLayer.set('userId', mappedProfile.userId)`
    * the `userObject` is a return from `options.mapUserProfile(profile)`
    * @param {Object} profile the profile object
    */
   identifyUser(profile) {
     debug("identify user %o", profile)
     const mappedProfile = this.mapUserProfile(profile)
-    window['google_tag_manager'][this.trackingId].dataLayer.set('userId', mappedProfile.userId)
+    const specificDataLayer = this.getSpecificDataLayer()
+    if (specificDataLayer) {
+      specificDataLayer.set('userId', mappedProfile.userId)
+    }
   }
 
+  /**
+   * retrieves the set userId from data layer
+   */
   getUserIdFromDataLayer() {
-    return window['google_tag_manager'][this.trackingId].dataLayer.get('userId')
+    const specificDataLayer = this.getSpecificDataLayer()
+    if (specificDataLayer) {
+      return specificDataLayer.get('userId')
+    }
+    return undefined
   }
 
   /**
