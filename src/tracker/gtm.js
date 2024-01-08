@@ -7,6 +7,7 @@ const debug = createDebug("rentspree-tracker:gtm")
 /**
  * The class for Google Tag Manager tracker
  * @param {String} options.trackingId the tracking ID for Google Tag Manager account
+ * @param {String} options.userId the user ID of the current user associated with this tracker instance, may be undefined
  * @extends BaseTracker
  */
 export class GTMTracker extends BaseTracker {
@@ -14,10 +15,11 @@ export class GTMTracker extends BaseTracker {
     super(options)
     debug("initialize GTMTracker with trackingID:%s", options.trackingId)
     this.trackingId = options.trackingId
+    this.userId = options.userId
   }
   /**
    * Static method for getting the GTM tracker
-   * @returns {Function | Proxy} the amplitude instance if it exist,
+   * @returns {Function | Proxy} the GTM data layer instance if it exists,
    * this method will return Proxy to avoid error
    */
   static getTracker() {
@@ -33,36 +35,15 @@ export class GTMTracker extends BaseTracker {
     )
   }
 
-  getSpecificDataLayer() {
-    if (has(window, `google_tag_manager.${this.trackingId}.dataLayer`)) {
-      return window['google_tag_manager'][this.trackingId].dataLayer
-    }
-    return undefined
-  } 
-
   /**
-   * identify the user and set it to data layer by calling `window['google_tag_manager'][this.trackingId].dataLayer.set('userId', mappedProfile.userId)`
+   * identify the user and set the userId attribute`
    * the `userObject` is a return from `options.mapUserProfile(profile)`
    * @param {Object} profile the profile object
    */
   identifyUser(profile) {
     debug("identify user %o", profile)
     const mappedProfile = this.mapUserProfile(profile)
-    const specificDataLayer = this.getSpecificDataLayer()
-    if (specificDataLayer) {
-      specificDataLayer.set('userId', mappedProfile.userId)
-    }
-  }
-
-  /**
-   * retrieves the set userId from data layer
-   */
-  getUserIdFromDataLayer() {
-    const specificDataLayer = this.getSpecificDataLayer()
-    if (specificDataLayer) {
-      return specificDataLayer.get('userId')
-    }
-    return undefined
+    this.userId = mappedProfile.id
   }
 
   /**
@@ -77,7 +58,6 @@ export class GTMTracker extends BaseTracker {
       properties
     )
     const dataLayer = GTMTracker.getTracker()
-    const userId = this.getUserIdFromDataLayer()
-    dataLayer.push({ event: eventName, properties: { userId, ...properties } })
+    dataLayer.push({ userId: this.userId, event: eventName, properties })
   }
 }

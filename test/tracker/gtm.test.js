@@ -32,45 +32,14 @@ describe("GTMTracker", () => {
     })
   })
 
-  describe("getSpecificTracker", () => {
-    const gtmTracker = new GTMTracker({
-      trackingId
-    })
-
-    afterEach(() => {
-      global['google_tag_manager'] = undefined
-    })
-
-    it("should return dataLayer object if it exists", () => {
-      global['google_tag_manager'] = {
-        [trackingId]: {
-          dataLayer: {
-            foo: 'bar'
-          }
-        }
-      }
-      expect(gtmTracker.getSpecificDataLayer()).toEqual(
-        expect.objectContaining({
-          foo: 'bar'
-        })
-      )
-    })
-    it("should return a undefined if dataLayer is not available", () => {
-      delete global['google_tag_manager']
-      expect(gtmTracker.getSpecificDataLayer()).toEqual(undefined)
-    })
-  })
-
   describe("tracking function", () => {
     const gtmTracker = new GTMTracker({
       trackingId,
       mapUserProfile: profile => ({
-        userId: profile.userId,
+        id: profile.userId,
       })
     })
     const userId = 1
-    const mockDataLayerSet = jest.fn()
-    const mockDataLayerGet = jest.fn()
     
     const mockGetTracker = jest.fn()
     const mockDataLayerPush = jest.fn()
@@ -80,19 +49,9 @@ describe("GTMTracker", () => {
 
     beforeAll(() => {
       GTMTracker.getTracker = mockGetTracker
-      global['google_tag_manager'] = {
-        [trackingId]: {
-          dataLayer: {
-            set: mockDataLayerSet,
-            get: mockDataLayerGet
-          }
-        }
-      }
     })
     
     afterEach(() => {
-      mockDataLayerSet.mockReset()
-      mockDataLayerGet.mockReset()
       mockDataLayerPush.mockReset()
     })
 
@@ -101,31 +60,23 @@ describe("GTMTracker", () => {
     })
 
     describe("identifyUser", () => {
-      it("should call dataLayer.set", () => {
+      it("should set the userId attribute", () => {
         gtmTracker.identifyUser({
           userId
         })
-        expect(mockDataLayerSet).toBeCalledWith('userId', userId)
-      })
-    })
-
-    describe("getUserIdFromDataLayer", () => {
-      it("should call dataLayer.get", () => {
-        gtmTracker.getUserIdFromDataLayer()
-        expect(mockDataLayerGet).toBeCalledWith('userId')
+        expect(gtmTracker.userId).toEqual(userId)
       })
     })
 
     describe("trackEvent", () => {
       it("should call trackEvent with userId", () => {
-        identifyUserSpy = jest.spyOn(gtmTracker, "getUserIdFromDataLayer").mockReturnValue(userId)
         const eventName = "test"
         const eventProperty = { foo: "bar" }
         gtmTracker.trackEvent(eventName, eventProperty)
         expect(mockDataLayerPush).toBeCalledWith({
+          userId,
           event: eventName,
           properties: {
-            userId,
             ...eventProperty
           }
         })
