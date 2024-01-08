@@ -1,6 +1,6 @@
 {
   "name": "@rentspree/tracker",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Tracking multiple analytics module for React",
   "license": "MIT",
   "repository": "rentspree/tracker",
