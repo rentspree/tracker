@@ -7,7 +7,7 @@ const debug = createDebug("rentspree-tracker:gtm")
 /**
  * The class for Google Tag Manager tracker
  * @param {String} options.trackingId the tracking ID for Google Tag Manager account
- * @param {String} options.userId the user ID of the current user associated with this tracker instance, may be undefined
+ * @param {String | undefined} options.userId the user ID of the current user associated with this tracker instance, may be undefined
  * @extends BaseTracker
  */
 export class GTMTracker extends BaseTracker {

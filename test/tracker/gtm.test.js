@@ -2,11 +2,19 @@ import { GTMTracker } from "../../src/tracker/gtm"
 
 describe("GTMTracker", () => {
   const trackingId = 'foobar'
+  const userId = 1
 
   describe("constructor", () => {
     it("should hold trackingId from option", () => {
       const gtmTracker = new GTMTracker({ trackingId })
       expect(gtmTracker.trackingId).toEqual(trackingId)
+      expect(gtmTracker.userId).toEqual(undefined)
+    })
+
+    it("should hold trackingId and userId from option", () => {
+      const gtmTracker = new GTMTracker({ trackingId, userId })
+      expect(gtmTracker.trackingId).toEqual(trackingId)
+      expect(gtmTracker.userId).toEqual(userId)
     })
   })
 
@@ -39,7 +47,6 @@ describe("GTMTracker", () => {
         id: profile.userId,
       })
     })
-    const userId = 1
     
     const mockGetTracker = jest.fn()
     const mockDataLayerPush = jest.fn()
