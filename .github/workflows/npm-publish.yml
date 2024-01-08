@@ -39,4 +39,6 @@ jobs:
         with:
           name: tracker-dist
           path: dist
-      - run: ls
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
