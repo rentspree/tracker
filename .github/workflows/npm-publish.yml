@@ -6,8 +6,9 @@ name: Node.js Package
 on:
   release:
     types: [created]
-  tags:
-    - v*
+  push:
+    tags:
+      - v*
 
 jobs:
   build:
@@ -20,6 +21,11 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: tracker-dist
+          path: dist
+          retention-days: 1
 
   publish-npm:
     needs: build
@@ -31,7 +37,9 @@ jobs:
           node-version: 20
           registry-url: https://registry.npmjs.org/
           scope: rentspree
-      - run: npm ci
+      - uses: actions/download-artifact@v3
+        with:
+          name: tracker-dist
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
